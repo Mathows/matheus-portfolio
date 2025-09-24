@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import matheusProfile from '@/assets/matheus-profile.jpg';
+import matheusProfile from '/lovable-uploads/a3fcd278-4490-4ae6-bc86-21cafbb57f7c.png';
 
 const AboutSection = () => {
   const ref = useRef(null);

@@ -32,7 +32,7 @@ const ExperienceSection = () => {
     {
       icon: Code,
       title: "Desenvolvimento Full Stack",
-      description: "Criação de aplicações completas usando C# .NET no backend e React/Blazor no frontend"
+      description: "Criação de aplicações completas usando C# .NET no backend e ASPX/DevExpress no frontend"
     },
     {
       icon: Database,
@@ -42,7 +42,7 @@ const ExperienceSection = () => {
     {
       icon: FileSpreadsheet,
       title: "Relatórios Avançados",
-      description: "Desenvolvimento de relatórios complexos utilizando DevExpress para análise de dados"
+      description: "Desenvolvimento de relatórios complexos utilizando SQL Server para análise de dados"
     },
     {
       icon: Zap,
@@ -100,16 +100,15 @@ const ExperienceSection = () => {
                     </div>
                     <div className="flex items-center space-x-2">
                       <MapPin className="w-4 h-4" />
-                      <span>Remoto</span>
+                      <span>Presencial</span>
                     </div>
                   </div>
 
                   {/* Description */}
                   <div className="space-y-4">
                     <p className="text-foreground-muted leading-relaxed">
-                      Atuo como desenvolvedor full stack, com foco em aplicações empresariais, 
-                      integração de sistemas, relatórios com DevExpress e otimização de banco 
-                      de dados em SQL Server.
+                      Atuo como desenvolvedor full stack, com foco em desenvolvimento de sistema interno, 
+                      relatórios com DevExpress e otimização de banco de dados em SQL Server.
                     </p>
 
                     <div className="space-y-3">
@@ -117,11 +116,11 @@ const ExperienceSection = () => {
                       <ul className="space-y-2 text-foreground-muted">
                         <li className="flex items-start space-x-2">
                           <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
-                          <span>Desenvolvimento de aplicações web usando C# .NET e React</span>
+                          <span>Desenvolvimento de aplicações web usando C# .NET e DevExpress</span>
                         </li>
                         <li className="flex items-start space-x-2">
                           <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
-                          <span>Criação de interfaces modernas com Blazor</span>
+                          <span>Análise de sistema</span>
                         </li>
                         <li className="flex items-start space-x-2">
                           <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />

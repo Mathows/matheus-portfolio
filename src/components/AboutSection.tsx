@@ -39,8 +39,7 @@ const AboutSection = () => {
           animate={isInView ? "visible" : "hidden"}
           className="max-w-6xl mx-auto"
         >
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 mt-24 lg:grid-cols-2 gap-12 items-center">
             {/* Profile Image */}
             <motion.div 
               variants={itemVariants}

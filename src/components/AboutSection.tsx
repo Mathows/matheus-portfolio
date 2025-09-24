@@ -51,7 +51,7 @@ const AboutSection = () => {
             {/* Profile Image */}
             <motion.div 
               variants={itemVariants}
-              className="flex justify-center lg:justify-end"
+              className="flex justify-center lg:justify-center order-first lg:order-last"
             >
               <div className="relative">
                 <motion.div
@@ -60,11 +60,12 @@ const AboutSection = () => {
                   className="relative"
                 >
                   <div className="absolute inset-0 bg-gradient-primary rounded-full blur-xl opacity-30 animate-glow" />
-                  <div className="relative w-72 h-72 rounded-full overflow-hidden border-4 border-card bg-card shadow-card-hover">
+                  <div className="relative w-80 h-80 rounded-full overflow-hidden border-4 border-card bg-card shadow-card-hover">
                     <img
                       src={matheusProfile}
                       alt="Matheus Alexandre"
-                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                      className="w-full h-full object-cover object-center transition-transform duration-300 hover:scale-110"
+                      style={{ objectPosition: 'center 20%' }}
                     />
                   </div>
                 </motion.div>

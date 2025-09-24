@@ -98,48 +98,8 @@ const AboutSection = () => {
                     criando aplicações modernas e performáticas.
                   </p>
                   
-                  <p>
-                    Especializado em desenvolvimento de aplicações empresariais, tenho experiência sólida 
-                    em integração de sistemas, otimização de banco de dados e criação de interfaces 
-                    intuitivas que proporcionam excelente experiência do usuário.
-                  </p>
-
-                  <p>
-                    Busco constantemente evoluir minhas habilidades e me manter atualizado com as 
-                    mais recentes tecnologias do mercado, sempre focando em entregar soluções 
-                    de alta qualidade e impacto.
-                  </p>
                 </div>
               </div>
-
-              {/* Stats */}
-              <motion.div 
-                variants={itemVariants}
-                className="grid grid-cols-2 gap-6 pt-6"
-              >
-                <div className="bg-card/50 backdrop-blur-sm rounded-lg p-4 border border-border/50 hover:border-primary/30 transition-all duration-300">
-                  <div className="text-2xl font-bold text-primary">2+</div>
-                  <div className="text-sm text-foreground-muted">Anos de Experiência</div>
-                </div>
-                
-                <div className="bg-card/50 backdrop-blur-sm rounded-lg p-4 border border-border/50 hover:border-primary/30 transition-all duration-300">
-                  <div className="text-2xl font-bold text-accent">15+</div>
-                  <div className="text-sm text-foreground-muted">Projetos Concluídos</div>
-                </div>
-              </motion.div>
-
-              {/* Skills Tags */}
-              <motion.div variants={itemVariants} className="flex flex-wrap gap-3 pt-4">
-                {['C#', '.NET', 'SQL Server', 'React', 'Blazor', 'DevExpress', 'JavaScript', 'TypeScript'].map((skill) => (
-                  <motion.span
-                    key={skill}
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    className="px-3 py-1 bg-gradient-primary text-primary-foreground text-sm rounded-full font-medium shadow-sm hover:shadow-glow transition-all duration-300"
-                  >
-                    {skill}
-                  </motion.span>
-                ))}
-              </motion.div>
             </motion.div>
           </div>
         </motion.div>

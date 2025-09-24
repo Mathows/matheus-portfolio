@@ -39,14 +39,7 @@ const AboutSection = () => {
           animate={isInView ? "visible" : "hidden"}
           className="max-w-6xl mx-auto"
         >
-          {/* Section Title */}
-          <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Sobre <span className="text-primary">Mim</span>
-            </h2>
-            <div className="w-20 h-1 bg-gradient-primary mx-auto rounded-full" />
-          </motion.div>
-
+          
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Profile Image */}
             <motion.div 

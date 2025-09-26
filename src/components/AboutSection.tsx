@@ -80,12 +80,12 @@ const AboutSection = () => {
             <motion.div variants={itemVariants} className="space-y-6">
               <div className="space-y-4">
                 <h3 className="text-2xl font-semibold text-foreground">
-                  Desenvolvedor Full Stack Apaixonado por Tecnologia
+                  Desenvolvedor Full Stack
                 </h3>
                 
                 <div className="text-lg text-foreground-muted leading-relaxed space-y-4">
                   <p>
-                    Sou desenvolvedor full stack apaixonado por tecnologia e soluções eficientes. 
+                    Sou desenvolvedor full stack há 2 anos. 
                     Trabalho com <span className="text-primary font-medium">C#, .NET, SQL Server, React, Blazor e DevExpress</span>, 
                     criando aplicações modernas e performáticas.
                   </p>

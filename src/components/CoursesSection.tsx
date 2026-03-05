@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { GraduationCap, Calendar, Award, ExternalLink, BookOpen, Code, Database, Globe } from 'lucide-react';
+import { GraduationCap, Calendar, Award, ExternalLink, BookOpen, Code, Database, Globe, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const CoursesSection = () => {
@@ -32,81 +32,87 @@ const CoursesSection = () => {
   const courses = [
     {
       id: 1,
-      title: "Formação C# e .NET",
-      institution: "Alura",
-      year: "2023",
-      category: "Backend",
-      duration: "120h",
-      description: "Formação completa em desenvolvimento backend com C# e .NET, incluindo Entity Framework, APIs RESTful e boas práticas.",
-      topics: ["C# Avançado", "ASP.NET Core", "Entity Framework", "APIs RESTful"],
-      icon: Code,
+      title: "Fundamentos do Blazor Web Assembly",
+      institution: "balta.io",
+      date: "08/01/2024",
+      level: "Basic",
+      category: "Frontend",
+      description: "Curso completo sobre criação de Single Page Applications ricas e interativas utilizando C# e WebAssembly.",
+      topics: ["C#", "Blazor", "WebAssembly"],
+      icon: Globe,
       gradient: "from-blue-600 to-indigo-600",
-      status: "Concluído"
+      status: "Concluído",
+      link: "https://balta.io/certificados/9765ce52-74fd-4540-a4f1-c8c61c5cf3aa"
     },
     {
       id: 2,
-      title: "SQL Server - Administração e Performance",
-      institution: "Microsoft Learn",
-      year: "2023",
-      category: "Database",
-      duration: "80h",
-      description: "Curso focado em administração, otimização e performance de bancos de dados SQL Server.",
-      topics: ["Otimização de Queries", "Índices", "Stored Procedures", "Performance Tuning"],
-      icon: Database,
-      gradient: "from-green-600 to-teal-600",
-      status: "Concluído"
+      title: "Fundamentos do Blazor Server",
+      institution: "balta.io",
+      date: "13/12/2023",
+      level: "Basic",
+      category: "Full Stack",
+      description: "Aprendizado focado no ciclo de vida dos componentes e na comunicação em tempo real via SignalR no Blazor Server.",
+      topics: ["C#", "Blazor Server", "SignalR"],
+      icon: Code,
+      gradient: "from-violet-600 to-purple-600",
+      status: "Concluído",
+      link: "https://balta.io/certificados/8f1f3c89-615d-424a-8f3b-f51938bab7bf"
     },
     {
       id: 3,
-      title: "React - Desenvolvimento Moderno",
-      institution: "Rocketseat",
-      year: "2024",
-      category: "Frontend",
-      duration: "100h",
-      description: "Desenvolvimento de aplicações web modernas com React, incluindo hooks, context API e performance.",
-      topics: ["React Hooks", "Context API", "Performance", "TypeScript"],
-      icon: Globe,
-      gradient: "from-purple-600 to-pink-600",
-      status: "Concluído"
+      title: "Fundamentos do ASP.NET 6",
+      institution: "balta.io",
+      date: "31/10/2023",
+      level: "Intermediate",
+      category: "Backend",
+      description: "Conceitos essenciais no ASP.NET 6 para o desenvolvimento de APIs modernas e aplicações baseadas em microserviços.",
+      topics: ["C#", "ASP.NET Core", "APIs REST"],
+      icon: Code,
+      gradient: "from-green-600 to-teal-600",
+      status: "Concluído",
+      link: "https://balta.io/certificados/5e192151-59b8-4ed7-911f-5c47daae8206"
     },
     {
       id: 4,
-      title: "DevExpress - Componentes Avançados",
-      institution: "DevExpress University",
-      year: "2024",
-      category: "UI/UX",
-      duration: "60h",
-      description: "Curso avançado sobre componentes DevExpress para criação de interfaces ricas e relatórios complexos.",
-      topics: ["Grid Components", "Reporting", "Charts", "Dashboard"],
+      title: "Uma visão geral sobre o ASP.NET Razor Pages",
+      institution: "balta.io",
+      date: "23/10/2023",
+      level: "Basic",
+      category: "Full Stack",
+      description: "Introdução ao paradigma baseado em páginas usando C# e HTML com ASP.NET Razor Pages, focando em produtividade.",
+      topics: ["C#", "Razor Pages", "ASP.NET"],
       icon: BookOpen,
       gradient: "from-orange-600 to-red-600",
-      status: "Em andamento"
+      status: "Concluído",
+      link: "https://balta.io/certificados/ce3d41c1-3643-4fdb-991f-60ea206e9fbd"
     },
     {
       id: 5,
-      title: "Azure Fundamentals",
-      institution: "Microsoft",
-      year: "2024",
-      category: "Cloud",
-      duration: "40h",
-      description: "Fundamentos de computação em nuvem com Microsoft Azure, incluindo serviços básicos e arquitetura.",
-      topics: ["Cloud Computing", "Azure Services", "Virtual Machines", "Storage"],
-      icon: Award,
+      title: "Fundamentos do Entity Framework",
+      institution: "balta.io",
+      date: "19/07/2023",
+      level: "Basic",
+      category: "Database",
+      description: "Mapeamento objeto-relacional com Entity Framework Core para otimizar o acesso e a manipulação de banco de dados.",
+      topics: ["C#", "Entity Framework", "ORM"],
+      icon: Database,
       gradient: "from-cyan-600 to-blue-600",
-      status: "Planejado"
+      status: "Concluído",
+      link: "https://balta.io/certificados/42e8b54a-9f05-46b2-add2-dcfee3516b9f"
     },
     {
       id: 6,
-      title: "Blazor - Full Stack Web Development",
-      institution: "Udemy",
-      year: "2023",
-      category: "Full Stack",
-      duration: "75h",
-      description: "Desenvolvimento full stack com Blazor Server e WebAssembly, incluindo integração com APIs.",
-      topics: ["Blazor Server", "WebAssembly", "Component Development", "State Management"],
-      icon: Code,
-      gradient: "from-violet-600 to-purple-600",
-      status: "Concluído"
+      title: "Acesso à dados com .NET, C#, Dapper e SQL Server",
+      institution: "balta.io",
+      date: "31/05/2023",
+      level: "Beginner",
+      category: "Database",
+      description: "Técnicas com foco em performance para acesso a dados usando as vantagens do Dapper em conjunto com o SQL Server.",
+      topics: ["C#", "Dapper", "SQL Server"],
+      icon: Database,
+      gradient: "from-blue-600 to-cyan-600",
+      status: "Concluído",
+      link: "https://balta.io/certificados/e40e6e2f-92ff-4a7f-ad28-3272d3e50de4"
     }
   ];
 
@@ -177,11 +183,11 @@ const CoursesSection = () => {
                     <div className="flex items-center space-x-4 text-sm text-foreground-muted mb-4">
                       <div className="flex items-center space-x-1">
                         <Calendar className="w-4 h-4" />
-                        <span>{course.year}</span>
+                        <span>{course.date}</span>
                       </div>
                       <div className="flex items-center space-x-1">
-                        <BookOpen className="w-4 h-4" />
-                        <span>{course.duration}</span>
+                        <TrendingUp className="w-4 h-4" />
+                        <span>{course.level}</span>
                       </div>
                     </div>
 
@@ -217,6 +223,7 @@ const CoursesSection = () => {
                       size="sm"
                       className="w-full border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-all duration-300"
                       disabled={course.status === 'Planejado'}
+                      onClick={() => course.link && window.open(course.link, '_blank')}
                     >
                       {course.status === 'Concluído' ? (
                         <>

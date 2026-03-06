@@ -78,8 +78,8 @@ const Header = () => {
                 onClick={() => scrollToSection(item.id)}
                 className={`relative text-sm font-medium transition-colors duration-300 ${
                   activeSection === item.id
-                    ? 'text-primary'
-                    : 'text-foreground-muted hover:text-foreground'
+                    ? 'text-blue-600'
+                    : 'text-gray-400 hover:text-white'
                 }`}
                 whileHover={{ y: -2 }}
                 whileTap={{ y: 0 }}

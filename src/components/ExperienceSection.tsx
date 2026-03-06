@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Building2, Calendar, MapPin, Code, Database, FileSpreadsheet, Zap } from 'lucide-react';
+import { Building2, Calendar, MapPin, Code, Database, FileSpreadsheet, Zap, Code2, Atom, LayoutTemplate } from 'lucide-react';
 
 const ExperienceSection = () => {
   const ref = useRef(null);
@@ -63,8 +63,8 @@ const ExperienceSection = () => {
         >
           {/* Section Title */}
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Minha <span className="text-primary">Experiência</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Minha <span className="text-blue-600">Experiência</span>
             </h2>
             <div className="w-20 h-1 bg-gradient-primary mx-auto rounded-full" />
           </motion.div>
@@ -172,27 +172,34 @@ const ExperienceSection = () => {
               {/* Skills Progress */}
               <motion.div variants={itemVariants} className="mt-8">
                 <h4 className="text-lg font-semibold text-foreground mb-6">Principais Tecnologias</h4>
-                <div className="space-y-4">
+                <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                   {[
-                    { name: 'C# & .NET', level: 90 },
-                    { name: 'SQL Server', level: 85 },
-                    { name: 'React & Blazor', level: 80 },
-                    { name: 'DevExpress', level: 85 }
-                  ].map((skill) => (
-                    <div key={skill.name} className="space-y-2">
-                      <div className="flex justify-between text-sm">
-                        <span className="text-foreground font-medium">{skill.name}</span>
-                        <span className="text-foreground-muted">{skill.level}%</span>
-                      </div>
-                      <div className="w-full bg-border rounded-full h-2">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          animate={isInView ? { width: `${skill.level}%` } : { width: 0 }}
-                          transition={{ duration: 1, delay: 0.5 }}
-                          className="bg-gradient-primary h-2 rounded-full"
-                        />
-                      </div>
-                    </div>
+                    { name: 'C#', iconClass: 'devicon-csharp-plain' },
+                    { name: '.NET', iconClass: 'devicon-dotnetcore-plain' },
+                    { name: '.NET MAUI', iconClass: 'devicon-dotnetcore-plain' },
+                    { name: 'SQL Server', iconClass: 'devicon-microsoftsqlserver-plain' },
+                    { name: 'React', iconClass: 'devicon-react-original' },
+                    { name: 'Blazor', iconClass: 'devicon-blazor-original' },
+                    { name: 'Java', iconClass: 'devicon-java-plain' },
+                    { name: 'TypeScript', iconClass: 'devicon-typescript-plain' },
+                    { name: 'Git', iconClass: 'devicon-git-plain' },
+                    { name: 'Docker', iconClass: 'devicon-docker-plain' },
+                   /* { name: 'Tailwind', iconClass: 'devicon-tailwindcss-original' } */
+                   
+                  ].map((skill, idx) => (
+                    <motion.div
+                      key={skill.name}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                      transition={{ duration: 0.4, delay: 0.05 * idx }}
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      className="flex flex-col items-center justify-center p-6 rounded-xl border border-primary/30 bg-card hover:bg-[#1a1025] hover:border-primary hover:shadow-[0_0_15px_rgba(139,92,246,0.3)] transition-all duration-300 group cursor-pointer"
+                    >
+                      <i className={`${skill.iconClass} text-5xl text-gray-300 group-hover:text-white transition-colors duration-300 mb-4`} />
+                      <span className="text-sm font-bold text-gray-300 group-hover:text-white transition-colors duration-300 text-center">
+                        {skill.name}
+                      </span>
+                    </motion.div>
                   ))}
                 </div>
               </motion.div>

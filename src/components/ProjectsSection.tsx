@@ -84,10 +84,10 @@ const ProjectsSection = () => {
         >
           {/* Section Title */}
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Meus <span className="text-primary">Projetos</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Meus <span className="text-blue-600">Projetos</span>
             </h2>
-            <p className="text-xl text-foreground-muted max-w-2xl mx-auto mb-6">
+            <p className="text-xl text-white max-w-2xl mx-auto mb-6">
               Alguns dos projetos que desenvolvi utilizando as mais modernas tecnologias
             </p>
             <div className="w-20 h-1 bg-gradient-primary mx-auto rounded-full" />

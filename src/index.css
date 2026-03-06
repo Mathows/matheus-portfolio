@@ -15,15 +15,15 @@
     --foreground-muted: 0 0% 70%;
 
     /* Brand Colors - Deep Blue Theme */
-    --primary: 217 91% 27%;
-    --primary-dark: 217 91% 20%;
-    --primary-light: 217 91% 35%;
+    --primary: 221 100% 45%;    /* Strong Bright Blue */
+    --primary-dark: 221 100% 30%; /* Darker Blue */
+    --primary-light: 221 100% 60%; /* Lighter Blue */
     --primary-foreground: 0 0% 98%;
 
     /* Accent Colors */
-    --accent: 260 75% 55%;
-    --accent-dark: 260 75% 45%;
-    --accent-light: 260 75% 65%;
+    --accent: 215 100% 50%;     /* Brighter Accent Blue */
+    --accent-dark: 215 100% 35%;
+    --accent-light: 215 100% 65%;
     --accent-foreground: 0 0% 98%;
 
     /* UI Colors */
@@ -34,7 +34,7 @@
     --border: 0 0% 15%;
     --border-light: 0 0% 20%;
     --input: 0 0% 10%;
-    --ring: 217 91% 35%;
+    --ring: 221 100% 50%;
 
     /* Status Colors */
     --destructive: 0 84% 60%;
@@ -43,16 +43,16 @@
     --warning: 38 92% 50%;
 
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(217 91% 27%), hsl(260 75% 55%));
-    --gradient-hero: linear-gradient(135deg, hsl(0 0% 4%) 0%, hsl(217 91% 15%) 50%, hsl(260 75% 25%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(260 75% 55%), hsl(280 85% 60%));
+    --gradient-primary: linear-gradient(135deg, hsl(221 100% 45%), hsl(215 100% 50%));
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 4%) 0%, hsl(221 100% 20%) 50%, hsl(215 100% 30%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(215 100% 50%), hsl(200 100% 55%));
     --gradient-card: linear-gradient(135deg, hsl(0 0% 6%) 0%, hsl(0 0% 8%) 100%);
 
     /* Shadows */
     --shadow-card: 0 4px 20px hsl(0 0% 0% / 0.3);
-    --shadow-card-hover: 0 8px 40px hsl(217 91% 27% / 0.2);
-    --shadow-glow: 0 0 30px hsl(217 91% 35% / 0.3);
-    --shadow-accent: 0 4px 20px hsl(260 75% 55% / 0.2);
+    --shadow-card-hover: 0 8px 40px hsl(221 100% 45% / 0.2);
+    --shadow-glow: 0 0 30px hsl(221 100% 50% / 0.3);
+    --shadow-accent: 0 4px 20px hsl(215 100% 50% / 0.2);
 
     /* Animation Variables */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);

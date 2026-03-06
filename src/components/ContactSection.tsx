@@ -109,8 +109,8 @@ const ContactSection = () => {
         >
           {/* Section Title */}
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Vamos <span className="text-primary">Conversar?</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Vamos <span className="text-blue-600">Conversar?</span>
             </h2>
             <p className="text-xl text-foreground-muted max-w-2xl mx-auto mb-6">
               Estou sempre aberto a novas oportunidades e desafios interessantes
@@ -285,7 +285,7 @@ const ContactSection = () => {
         className="text-center mt-20 pt-8 border-t border-border/30"
       >
         <p className="text-foreground-muted">
-          © 2024 Matheus Alexandre. Desenvolvido com ❤️ e tecnologias modernas.
+          © 2025 Matheus Alexandre. Todos os direitos reservados.
         </p>
       </motion.div>
     </section>

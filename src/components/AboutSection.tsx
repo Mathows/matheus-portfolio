@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import matheusProfile from '/lovable-uploads/perfil.jpeg';
+import matheusProfile from '/images/Gemini_Foto3.png';
 
 const AboutSection = () => {
   const ref = useRef(null);
@@ -57,22 +57,10 @@ const AboutSection = () => {
                       src={matheusProfile}
                       alt="Matheus Alexandre"
                       className="w-full h-full object-cover object-center transition-transform duration-300 hover:scale-110"
-                      style={{ objectPosition: 'center 20%' }}
+                      style={{ objectPosition: 'center 50%' }}
                     />
                   </div>
                 </motion.div>
-                
-                {/* Floating Elements */}
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  className="absolute -top-4 -right-4 w-20 h-20 border-2 border-primary/30 rounded-full"
-                />
-                <motion.div
-                  animate={{ rotate: -360 }}
-                  transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                  className="absolute -bottom-6 -left-6 w-16 h-16 border border-accent/30 rounded-full"
-                />
               </div>
             </motion.div>
 
@@ -83,10 +71,10 @@ const AboutSection = () => {
                   Desenvolvedor Full Stack
                 </h3>
                 
-                <div className="text-lg text-foreground-muted leading-relaxed space-y-4">
+                <div className="text-lg text-white leading-relaxed space-y-4">
                   <p>
                     Sou desenvolvedor full stack há 2 anos. 
-                    Trabalho com <span className="text-primary font-medium">C#, .NET, SQL Server, React, Blazor e DevExpress</span>, 
+                    Trabalho com <span className="text-blue-500 font-medium">C#, .NET, SQL Server, React, Blazor e DevExpress</span>, 
                     criando aplicações modernas e performáticas.
                   </p>
                   

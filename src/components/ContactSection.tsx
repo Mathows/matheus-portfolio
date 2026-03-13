@@ -44,23 +44,16 @@ const ContactSection = () => {
     {
       name: 'GitHub',
       icon: Github,
-      url: 'https://github.com/matheusalexandre',
+      url: 'https://github.com/Mathows',
       color: 'hover:text-foreground',
       bgColor: 'hover:bg-foreground/10'
     },
     {
       name: 'LinkedIn',
       icon: Linkedin,
-      url: 'https://linkedin.com/in/matheusalexandre',
+      url: 'https://www.linkedin.com/in/matheus-alexandre-marques?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
       color: 'hover:text-blue-400',
       bgColor: 'hover:bg-blue-400/10'
-    },
-    {
-      name: 'Email',
-      icon: Mail,
-      url: 'mailto:matheus@exemplo.com',
-      color: 'hover:text-primary',
-      bgColor: 'hover:bg-primary/10'
     }
   ];
 
@@ -76,22 +69,19 @@ const ContactSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      const text = `Olá! Meu nome é ${formData.name}.\n\nMensagem: ${formData.message}`;
+      const encodedText = encodeURIComponent(text);
+      const whatsappUrl = `https://api.whatsapp.com/send/?phone=5512978149796&text=${encodedText}&type=phone_number&app_absent=0`;
+      
+      window.open(whatsappUrl, '_blank');
       
       toast({
-        title: "Mensagem enviada!",
-        description: "Obrigado pelo contato. Retornarei em breve!",
+        title: "Redirecionando...",
+        description: "Abrindo o WhatsApp para enviar sua mensagem.",
       });
 
       setFormData({ name: '', email: '', message: '' });
-    } catch (error) {
-      toast({
-        title: "Erro ao enviar mensagem",
-        description: "Tente novamente mais tarde.",
-        variant: "destructive",
-      });
     } finally {
       setIsSubmitting(false);
     }
@@ -141,7 +131,7 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-foreground">Email</h4>
-                    <p className="text-foreground-muted">matheus@exemplo.com</p>
+                    <p className="text-foreground-muted">matheusalexmc@gmail.com</p>
                   </div>
                 </motion.div>
 

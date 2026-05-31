@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { ExternalLink, Github, Code, Database, Monitor, Zap } from 'lucide-react';
+import { ExternalLink, Github, Wallet, Megaphone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const ProjectsSection = () => {
@@ -32,43 +32,27 @@ const ProjectsSection = () => {
   const projects = [
     {
       id: 1,
-      title: "Sistema de Gestão Empresarial",
-      description: "Aplicação completa para gestão de processos empresariais com dashboards interativos, relatórios avançados e integração com sistemas legados.",
-      technologies: ["C#", ".NET", "SQL Server", "Blazor", "DevExpress"],
-      category: "Enterprise",
-      status: "Em desenvolvimento",
-      icon: Monitor,
-      gradient: "from-blue-600 to-purple-600"
+      title: "Dima — Controle Financeiro",
+      description: "Aplicação full stack de gestão financeira pessoal: cadastro de categorias, lançamentos de receitas e despesas, dashboard com gráficos e plano premium com pagamentos integrados via Stripe.",
+      technologies: [".NET 8", "Blazor WASM", "MudBlazor", "EF Core", "SQL Server", "Stripe"],
+      category: "Finanças",
+      status: "Concluído",
+      icon: Wallet,
+      gradient: "from-emerald-600 to-teal-600",
+      github: "https://github.com/Mathows/dima-controle-financeiro",
+      demo: ""
     },
     {
       id: 2,
-      title: "Dashboard Analítico",
-      description: "Interface moderna para visualização de dados empresariais com gráficos interativos e relatórios personalizáveis em tempo real.",
-      technologies: ["React", "TypeScript", "DevExpress", "SQL Server"],
-      category: "Analytics",
-      status: "Concluído",
-      icon: Database,
-      gradient: "from-green-600 to-blue-600"
-    },
-    {
-      id: 3,
-      title: "API de Integração",
-      description: "Sistema de APIs RESTful para integração entre diferentes plataformas, com documentação completa e autenticação JWT.",
-      technologies: ["C#", ".NET Core", "SQL Server", "JWT"],
-      category: "Backend",
-      status: "Concluído",
-      icon: Code,
-      gradient: "from-purple-600 to-pink-600"
-    },
-    {
-      id: 4,
-      title: "Aplicação Mobile Web",
-      description: "Progressive Web App responsiva para gestão mobile de processos empresariais com sincronização offline.",
-      technologies: ["React", "PWA", "TypeScript", "REST API"],
-      category: "Mobile",
+      title: "Vieira Solutions",
+      description: "Site institucional e landing page para uma agência digital, com formulário de contato que registra os leads no banco, dispara e-mails automáticos de notificação e auto-resposta, e redireciona o cliente para o WhatsApp.",
+      technologies: [".NET 10", "Blazor WASM", "MudBlazor", "EF Core", "SQL Server", "MailKit"],
+      category: "Web",
       status: "Em desenvolvimento",
-      icon: Zap,
-      gradient: "from-orange-600 to-red-600"
+      icon: Megaphone,
+      gradient: "from-blue-600 to-purple-600",
+      github: "https://github.com/Mathows/vieira-solutions",
+      demo: ""
     }
   ];
 
@@ -149,21 +133,27 @@ const ProjectsSection = () => {
 
                   {/* Project Actions */}
                   <div className="flex space-x-3 mt-auto">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="flex-1 border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-all duration-300"
-                    >
-                      <Github className="w-4 h-4 mr-2" />
-                      Código
-                    </Button>
-                    <Button
-                      size="sm"
-                      className="flex-1 bg-gradient-primary hover:bg-gradient-accent text-primary-foreground transition-all duration-300"
-                    >
-                      <ExternalLink className="w-4 h-4 mr-2" />
-                      Demo
-                    </Button>
+                    {project.github && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="flex-1 border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-all duration-300"
+                        onClick={() => window.open(project.github, '_blank')}
+                      >
+                        <Github className="w-4 h-4 mr-2" />
+                        Código
+                      </Button>
+                    )}
+                    {project.demo && (
+                      <Button
+                        size="sm"
+                        className="flex-1 bg-gradient-primary hover:bg-gradient-accent text-primary-foreground transition-all duration-300"
+                        onClick={() => window.open(project.demo, '_blank')}
+                      >
+                        <ExternalLink className="w-4 h-4 mr-2" />
+                        Demo
+                      </Button>
+                    )}
                   </div>
 
                   {/* Hover Effect Overlay */}

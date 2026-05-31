@@ -48,7 +48,7 @@ const ProjectsSection = () => {
       description: "Site institucional e landing page para uma agência digital, com formulário de contato que registra os leads no banco, dispara e-mails automáticos de notificação e auto-resposta, e redireciona o cliente para o WhatsApp.",
       technologies: [".NET 10", "Blazor WASM", "MudBlazor", "EF Core", "SQL Server", "MailKit"],
       category: "Web",
-      status: "Em desenvolvimento",
+      status: "Concluído",
       icon: Megaphone,
       gradient: "from-blue-600 to-purple-600",
       github: "https://github.com/Mathows/vieira-solutions",

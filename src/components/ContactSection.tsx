@@ -101,9 +101,9 @@ const ContactSection = () => {
         >
           {/* Section Title */}
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
               {dict.contact.titlePrefix}
-              <span className="text-blue-600">{dict.contact.titleHighlight}</span>
+              <span className="text-primary">{dict.contact.titleHighlight}</span>
             </h2>
             <p className="text-xl text-foreground-muted max-w-2xl mx-auto mb-6">
               {dict.contact.subtitle}

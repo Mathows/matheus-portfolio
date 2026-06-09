@@ -73,10 +73,10 @@ const AboutSection = () => {
                   {dict.about.role}
                 </h3>
 
-                <div className="text-lg text-white leading-relaxed space-y-4">
+                <div className="text-lg text-foreground leading-relaxed space-y-4">
                   <p>
                     {dict.about.bioStart}
-                    <span className="text-blue-500 font-medium">{dict.about.bioStack}</span>
+                    <span className="text-primary font-medium">{dict.about.bioStack}</span>
                     {dict.about.bioEnd}
                   </p>
                 </div>

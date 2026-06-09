@@ -41,10 +41,9 @@ const HeroSection = () => {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-hero" />
-      <div className="absolute inset-0">
+    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background">
+      {/* Background Effects — subtle floating orbs */}
+      <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-float" />
         <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '-1s' }} />
       </div>
@@ -115,21 +114,21 @@ const HeroSection = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1, delay: 1.4 }}
-              className="flex flex-wrap justify-center gap-6 max-w-md mx-auto"
+              className="flex flex-wrap justify-center gap-6 max-w-md mx-auto mb-24"
             >
               {techIcons.map((tech, index) => (
                 <motion.div
                   key={tech.name}
                   initial={{ opacity: 0, scale: 0 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ 
-                    duration: 0.5, 
+                  transition={{
+                    duration: 0.5,
                     delay: 1.6 + index * 0.1,
                     type: "spring",
                     stiffness: 200
                   }}
-                  whileHover={{ 
-                    scale: 1.2, 
+                  whileHover={{
+                    scale: 1.2,
                     y: -5,
                     transition: { duration: 0.2 }
                   }}
@@ -139,25 +138,25 @@ const HeroSection = () => {
                 </motion.div>
               ))}
             </motion.div>
+
+            {/* Scroll Indicator — in flow with guaranteed spacing */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 2 }}
+              className="flex justify-center"
+            >
+              <motion.div
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="flex flex-col items-center text-foreground-muted"
+              >
+                <span className="text-sm mb-2">{dict.hero.scrollDown}</span>
+                <ChevronDown className="w-5 h-5" />
+              </motion.div>
+            </motion.div>
           </motion.div>
         </div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 2 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="flex flex-col items-center text-foreground-muted"
-          >
-            <span className="text-sm mb-2">{dict.hero.scrollDown}</span>
-            <ChevronDown className="w-5 h-5" />
-          </motion.div>
-        </motion.div>
       </div>
     </section>
   );

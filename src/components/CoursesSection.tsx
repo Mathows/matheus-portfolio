@@ -126,9 +126,9 @@ const CoursesSection = () => {
           <motion.div variants={itemVariants} className="text-center mb-16">
             <div className="flex items-center justify-center mb-4">
               <GraduationCap className="w-12 h-12 text-primary mr-4" />
-              <h2 className="text-4xl md:text-5xl font-bold text-white">
+              <h2 className="text-4xl md:text-5xl font-bold text-foreground">
                 {dict.courses.titlePrefix}
-                <span className="text-blue-600">{dict.courses.titleHighlight}</span>
+                <span className="text-primary">{dict.courses.titleHighlight}</span>
               </h2>
             </div>
             <p className="text-xl text-foreground-muted max-w-2xl mx-auto mb-6">

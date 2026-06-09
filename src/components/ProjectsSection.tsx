@@ -82,11 +82,11 @@ const ProjectsSection = () => {
         >
           {/* Section Title */}
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
               {dict.projects.titlePrefix}
-              <span className="text-blue-600">{dict.projects.titleHighlight}</span>
+              <span className="text-primary">{dict.projects.titleHighlight}</span>
             </h2>
-            <p className="text-xl text-white max-w-2xl mx-auto mb-6">
+            <p className="text-xl text-foreground max-w-2xl mx-auto mb-6">
               {dict.projects.subtitle}
             </p>
             <div className="w-20 h-1 bg-gradient-primary mx-auto rounded-full" />

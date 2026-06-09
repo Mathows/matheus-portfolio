@@ -1,11 +1,19 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Moon, Sun } from 'lucide-react';
+import { useTheme } from 'next-themes';
 import { useLanguage } from '@/lib/i18n';
 
 const Header = () => {
   const { language, setLanguage, dict } = useLanguage();
+  const { theme, setTheme } = useTheme();
   const [activeSection, setActiveSection] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const navItems = [
     { id: 'home', label: dict.nav.home },
@@ -44,6 +52,8 @@ const Header = () => {
     }
   };
 
+  const isDark = theme !== 'light';
+
   return (
     <motion.header
       initial={{ y: -100, opacity: 0 }}
@@ -56,17 +66,17 @@ const Header = () => {
       }`}
     >
       <div className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-end gap-6">
+        <div className="flex items-center justify-end gap-4">
           {/* Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-8 mr-2">
             {navItems.map((item) => (
               <motion.button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
                 className={`relative text-sm font-medium transition-colors duration-300 ${
                   activeSection === item.id
-                    ? 'text-blue-600'
-                    : 'text-gray-400 hover:text-white'
+                    ? 'text-primary'
+                    : 'text-foreground-muted hover:text-foreground'
                 }`}
                 whileHover={{ y: -2 }}
                 whileTap={{ y: 0 }}
@@ -83,6 +93,17 @@ const Header = () => {
               </motion.button>
             ))}
           </nav>
+
+          {/* Theme Toggle */}
+          {mounted && (
+            <button
+              onClick={() => setTheme(isDark ? 'light' : 'dark')}
+              className="w-9 h-9 flex items-center justify-center rounded-full bg-card/40 backdrop-blur-sm border border-border/50 text-foreground-muted hover:text-foreground hover:border-primary/50 transition-all duration-200"
+              aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
+            >
+              {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
+          )}
 
           {/* Language Toggle */}
           <div className="flex items-center bg-card/40 backdrop-blur-sm border border-border/50 rounded-full p-1 text-xs font-semibold">

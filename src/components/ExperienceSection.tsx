@@ -57,9 +57,9 @@ const ExperienceSection = () => {
         >
           {/* Section Title */}
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
               {dict.experience.titlePrefix}
-              <span className="text-blue-600">{dict.experience.titleHighlight}</span>
+              <span className="text-primary">{dict.experience.titleHighlight}</span>
             </h2>
             <div className="w-20 h-1 bg-gradient-primary mx-auto rounded-full" />
           </motion.div>
@@ -167,10 +167,10 @@ const ExperienceSection = () => {
                       animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
                       transition={{ duration: 0.4, delay: 0.05 * idx }}
                       whileHover={{ scale: 1.05, y: -2 }}
-                      className="flex flex-col items-center justify-center p-6 rounded-xl border border-primary/30 bg-card hover:bg-[#1a1025] hover:border-primary hover:shadow-[0_0_15px_rgba(139,92,246,0.3)] transition-all duration-300 group cursor-pointer"
+                      className="flex flex-col items-center justify-center p-6 rounded-xl border border-primary/30 bg-card hover:bg-card-hover hover:border-primary hover:shadow-glow transition-all duration-300 group cursor-pointer"
                     >
-                      <i className={`${skill.iconClass} text-5xl text-gray-300 group-hover:text-white transition-colors duration-300 mb-4`} />
-                      <span className="text-sm font-bold text-gray-300 group-hover:text-white transition-colors duration-300 text-center">
+                      <i className={`${skill.iconClass} text-5xl text-foreground-muted group-hover:text-primary transition-colors duration-300 mb-4`} />
+                      <span className="text-sm font-bold text-foreground-muted group-hover:text-foreground transition-colors duration-300 text-center">
                         {skill.name}
                       </span>
                     </motion.div>

@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { ExternalLink, Github, Wallet, Megaphone } from 'lucide-react';
+import { ExternalLink, Github, Wallet, Smartphone, Megaphone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const ProjectsSection = () => {
@@ -33,26 +33,38 @@ const ProjectsSection = () => {
     {
       id: 1,
       title: "Dima — Controle Financeiro",
-      description: "Aplicação full stack de gestão financeira pessoal: cadastro de categorias, lançamentos de receitas e despesas, dashboard com gráficos e plano premium com pagamentos integrados via Stripe.",
+      description: "Aplicação full stack de gestão financeira pessoal: cadastro de categorias, lançamentos com recorrência mensal, dashboard com gráficos e plano Premium integrado com Stripe. Deploy automático no Azure (App Service + Static Web Apps + SQL Free).",
       technologies: [".NET 8", "Blazor WASM", "MudBlazor", "EF Core", "SQL Server", "Stripe"],
-      category: "Finanças",
+      category: "Full Stack",
       status: "Concluído",
       icon: Wallet,
       gradient: "from-emerald-600 to-teal-600",
       github: "https://github.com/Mathows/dima-controle-financeiro",
-      demo: ""
+      demo: "https://black-sand-042c6dc03.7.azurestaticapps.net"
     },
     {
       id: 2,
+      title: "Dima Mobile (Android)",
+      description: "App mobile do Dima em .NET MAUI Blazor Hybrid, reaproveitando 100% do Core compartilhado com a Web. Autenticação JWT com tokens em SecureStorage (Android Keystore), CRUD completo de lançamentos com recorrência e dashboard com gráficos. APK Android disponível na release do GitHub.",
+      technologies: [".NET 9", ".NET MAUI", "Blazor Hybrid", "MudBlazor", "JWT"],
+      category: "Mobile",
+      status: "Concluído",
+      icon: Smartphone,
+      gradient: "from-blue-600 to-indigo-600",
+      github: "https://github.com/Mathows/dima-controle-financeiro",
+      demo: "https://github.com/Mathows/dima-controle-financeiro/releases/latest"
+    },
+    {
+      id: 3,
       title: "Vieira Solutions",
-      description: "Site institucional e landing page para uma agência digital, com formulário de contato que registra os leads no banco, dispara e-mails automáticos de notificação e auto-resposta, e redireciona o cliente para o WhatsApp.",
+      description: "Site institucional e landing page para agência digital, com formulário de contato que persiste leads no banco, dispara e-mails automáticos (notificação interna + auto-resposta via MailKit) e redireciona o cliente para o WhatsApp com mensagem pré-formatada.",
       technologies: [".NET 10", "Blazor WASM", "MudBlazor", "EF Core", "SQL Server", "MailKit"],
       category: "Web",
       status: "Concluído",
       icon: Megaphone,
-      gradient: "from-blue-600 to-purple-600",
+      gradient: "from-purple-600 to-pink-600",
       github: "https://github.com/Mathows/vieira-solutions",
-      demo: ""
+      demo: null
     }
   ];
 
@@ -78,8 +90,8 @@ const ProjectsSection = () => {
           </motion.div>
 
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-            {projects.map((project, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            {projects.map((project) => (
               <motion.div
                 key={project.id}
                 variants={itemVariants}
@@ -87,11 +99,11 @@ const ProjectsSection = () => {
                 transition={{ duration: 0.3 }}
                 className="group relative"
               >
-                <div className="bg-gradient-card backdrop-blur-sm rounded-2xl p-8 border border-border/50 shadow-card hover:shadow-card-hover transition-all duration-500 h-full">
+                <div className="bg-gradient-card backdrop-blur-sm rounded-2xl p-8 border border-border/50 shadow-card hover:shadow-card-hover transition-all duration-500 h-full flex flex-col">
                   {/* Project Header */}
                   <div className="flex items-start justify-between mb-6">
                     <div className="flex items-center space-x-4">
-                      <div className={`w-12 h-12 bg-gradient-to-r ${project.gradient} rounded-xl flex items-center justify-center shadow-glow`}>
+                      <div className={`w-12 h-12 bg-gradient-to-r ${project.gradient} rounded-xl flex items-center justify-center shadow-glow flex-shrink-0`}>
                         <project.icon className="w-6 h-6 text-white" />
                       </div>
                       <div>
@@ -103,8 +115,8 @@ const ProjectsSection = () => {
                             {project.category}
                           </span>
                           <span className={`text-xs px-2 py-1 rounded-full ${
-                            project.status === 'Concluído' 
-                              ? 'bg-success/20 text-success' 
+                            project.status === 'Concluído'
+                              ? 'bg-success/20 text-success'
                               : 'bg-warning/20 text-warning'
                           }`}>
                             {project.status}
@@ -115,7 +127,7 @@ const ProjectsSection = () => {
                   </div>
 
                   {/* Project Description */}
-                  <p className="text-foreground-muted leading-relaxed mb-6">
+                  <p className="text-foreground-muted leading-relaxed mb-6 flex-1">
                     {project.description}
                   </p>
 
@@ -133,17 +145,15 @@ const ProjectsSection = () => {
 
                   {/* Project Actions */}
                   <div className="flex space-x-3 mt-auto">
-                    {project.github && (
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="flex-1 border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-all duration-300"
-                        onClick={() => window.open(project.github, '_blank')}
-                      >
-                        <Github className="w-4 h-4 mr-2" />
-                        Código
-                      </Button>
-                    )}
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex-1 border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-all duration-300"
+                      onClick={() => window.open(project.github, '_blank')}
+                    >
+                      <Github className="w-4 h-4 mr-2" />
+                      Código
+                    </Button>
                     {project.demo && (
                       <Button
                         size="sm"
@@ -151,7 +161,7 @@ const ProjectsSection = () => {
                         onClick={() => window.open(project.demo, '_blank')}
                       >
                         <ExternalLink className="w-4 h-4 mr-2" />
-                        Demo
+                        Acesse
                       </Button>
                     )}
                   </div>
@@ -173,7 +183,7 @@ const ProjectsSection = () => {
                 Interessado em colaborar?
               </h3>
               <p className="text-foreground-muted mb-6">
-                Estou sempre aberto a novos desafios e oportunidades de colaboração. 
+                Estou sempre aberto a novos desafios e oportunidades de colaboração.
                 Vamos conversar sobre seu próximo projeto!
               </p>
               <Button

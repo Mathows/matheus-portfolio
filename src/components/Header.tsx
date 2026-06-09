@@ -54,22 +54,7 @@ const Header = () => {
       }`}
     >
       <div className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center space-x-2 cursor-pointer"
-            onClick={() => scrollToSection('home')}
-          >
-            <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center shadow-glow">
-              <span className="text-primary-foreground font-bold text-lg">MA</span>
-            </div>
-            <span className="text-foreground font-semibold text-lg hidden sm:block">
-              Matheus Alexandre
-            </span>
-          </motion.div>
-
+        <div className="flex items-center justify-end">
           {/* Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (

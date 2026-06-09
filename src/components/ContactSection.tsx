@@ -5,12 +5,14 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import { useLanguage } from '@/lib/i18n';
 
 const ContactSection = () => {
+  const { dict } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
   const { toast } = useToast();
-  
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -70,15 +72,15 @@ const ContactSection = () => {
     setIsSubmitting(true);
 
     try {
-      const text = `Olá! Meu nome é ${formData.name}.\n\nMensagem: ${formData.message}`;
+      const text = `${dict.contact.whatsappGreeting} ${formData.name}.\n\n${dict.contact.whatsappMessage} ${formData.message}`;
       const encodedText = encodeURIComponent(text);
       const whatsappUrl = `https://api.whatsapp.com/send/?phone=5512978149796&text=${encodedText}&type=phone_number&app_absent=0`;
-      
+
       window.open(whatsappUrl, '_blank');
-      
+
       toast({
-        title: "Redirecionando...",
-        description: "Abrindo o WhatsApp para enviar sua mensagem.",
+        title: dict.contact.toastTitle,
+        description: dict.contact.toastDescription,
       });
 
       setFormData({ name: '', email: '', message: '' });
@@ -100,23 +102,23 @@ const ContactSection = () => {
           {/* Section Title */}
           <motion.div variants={itemVariants} className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Vamos <span className="text-blue-600">Conversar?</span>
+              {dict.contact.titlePrefix}
+              <span className="text-blue-600">{dict.contact.titleHighlight}</span>
             </h2>
             <p className="text-xl text-foreground-muted max-w-2xl mx-auto mb-6">
-              Estou sempre aberto a novas oportunidades e desafios interessantes
+              {dict.contact.subtitle}
             </p>
             <div className="w-20 h-1 bg-gradient-primary mx-auto rounded-full" />
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            
+
             {/* Contact Info */}
             <motion.div variants={itemVariants} className="space-y-8">
               <div>
-                <h3 className="text-2xl font-bold text-foreground mb-6">Entre em Contato</h3>
+                <h3 className="text-2xl font-bold text-foreground mb-6">{dict.contact.infoTitle}</h3>
                 <p className="text-foreground-muted leading-relaxed mb-8">
-                  Seja para discutir um projeto, uma oportunidade de trabalho ou apenas trocar ideias 
-                  sobre tecnologia, adoraria conversar com você!
+                  {dict.contact.infoText}
                 </p>
               </div>
 
@@ -130,7 +132,7 @@ const ContactSection = () => {
                     <Mail className="w-6 h-6 text-primary-foreground" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground">Email</h4>
+                    <h4 className="font-semibold text-foreground">{dict.contact.emailLabel}</h4>
                     <p className="text-foreground-muted">matheusalexmc@gmail.com</p>
                   </div>
                 </motion.div>
@@ -143,8 +145,8 @@ const ContactSection = () => {
                     <MapPin className="w-6 h-6 text-accent-foreground" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground">Localização</h4>
-                    <p className="text-foreground-muted">Brasil - Remoto</p>
+                    <h4 className="font-semibold text-foreground">{dict.contact.locationLabel}</h4>
+                    <p className="text-foreground-muted">{dict.contact.locationValue}</p>
                   </div>
                 </motion.div>
 
@@ -156,15 +158,15 @@ const ContactSection = () => {
                     <Phone className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground">Disponibilidade</h4>
-                    <p className="text-foreground-muted">Seg - Sex, 9h às 18h</p>
+                    <h4 className="font-semibold text-foreground">{dict.contact.availabilityLabel}</h4>
+                    <p className="text-foreground-muted">{dict.contact.availabilityValue}</p>
                   </div>
                 </motion.div>
               </div>
 
               {/* Social Links */}
               <div className="pt-8">
-                <h4 className="font-semibold text-foreground mb-4">Redes Sociais</h4>
+                <h4 className="font-semibold text-foreground mb-4">{dict.contact.socialTitle}</h4>
                 <div className="flex space-x-4">
                   {socialLinks.map((social) => (
                     <motion.a
@@ -186,13 +188,13 @@ const ContactSection = () => {
             {/* Contact Form */}
             <motion.div variants={itemVariants}>
               <div className="bg-gradient-card backdrop-blur-sm rounded-2xl p-8 border border-border/50 shadow-card">
-                <h3 className="text-2xl font-bold text-foreground mb-6">Envie uma Mensagem</h3>
-                
+                <h3 className="text-2xl font-bold text-foreground mb-6">{dict.contact.formTitle}</h3>
+
                 <form onSubmit={handleSubmit} className="space-y-6">
                   {/* Name Field */}
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                      Nome *
+                      {dict.contact.formName} *
                     </label>
                     <Input
                       id="name"
@@ -202,14 +204,14 @@ const ContactSection = () => {
                       value={formData.name}
                       onChange={handleInputChange}
                       className="bg-input/50 border-border/50 focus:border-primary/50 focus:ring-primary/20"
-                      placeholder="Seu nome completo"
+                      placeholder={dict.contact.formNamePlaceholder}
                     />
                   </div>
 
                   {/* Email Field */}
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                      Email *
+                      {dict.contact.formEmail} *
                     </label>
                     <Input
                       id="email"
@@ -219,14 +221,14 @@ const ContactSection = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       className="bg-input/50 border-border/50 focus:border-primary/50 focus:ring-primary/20"
-                      placeholder="seu@email.com"
+                      placeholder={dict.contact.formEmailPlaceholder}
                     />
                   </div>
 
                   {/* Message Field */}
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                      Mensagem *
+                      {dict.contact.formMessage} *
                     </label>
                     <Textarea
                       id="message"
@@ -236,7 +238,7 @@ const ContactSection = () => {
                       value={formData.message}
                       onChange={handleInputChange}
                       className="bg-input/50 border-border/50 focus:border-primary/50 focus:ring-primary/20 resize-none"
-                      placeholder="Conte-me sobre seu projeto ou ideia..."
+                      placeholder={dict.contact.formMessagePlaceholder}
                     />
                   </div>
 
@@ -253,12 +255,12 @@ const ContactSection = () => {
                           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                           className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full mr-2"
                         />
-                        Enviando...
+                        {dict.contact.submitting}
                       </>
                     ) : (
                       <>
                         <Send className="w-4 h-4 mr-2" />
-                        Enviar Mensagem
+                        {dict.contact.submitButton}
                       </>
                     )}
                   </Button>
@@ -275,7 +277,7 @@ const ContactSection = () => {
         className="text-center mt-20 pt-8 border-t border-border/30"
       >
         <p className="text-foreground-muted">
-          © 2025 Matheus Alexandre. Todos os direitos reservados.
+          {dict.contact.footer}
         </p>
       </motion.div>
     </section>

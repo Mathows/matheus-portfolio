@@ -2,8 +2,10 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { ExternalLink, Github, Wallet, Smartphone, Megaphone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/lib/i18n';
 
 const ProjectsSection = () => {
+  const { dict } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
@@ -32,39 +34,39 @@ const ProjectsSection = () => {
   const projects = [
     {
       id: 1,
-      title: "Dima — Controle Financeiro",
-      description: "Aplicação full stack de gestão financeira pessoal: cadastro de categorias, lançamentos com recorrência mensal, dashboard com gráficos e plano Premium integrado com Stripe. Deploy automático no Azure (App Service + Static Web Apps + SQL Free).",
+      title: dict.projects.list.dima.title,
+      description: dict.projects.list.dima.description,
+      category: dict.projects.list.dima.category,
       technologies: [".NET 8", "Blazor WASM", "MudBlazor", "EF Core", "SQL Server", "Stripe"],
-      category: "Full Stack",
-      status: "Concluído",
+      status: dict.projects.status.completed,
       icon: Wallet,
       gradient: "from-emerald-600 to-teal-600",
       github: "https://github.com/Mathows/dima-controle-financeiro",
-      demo: "https://black-sand-042c6dc03.7.azurestaticapps.net"
+      demo: "https://black-sand-042c6dc03.7.azurestaticapps.net" as string | null
     },
     {
       id: 2,
-      title: "Dima Mobile (Android)",
-      description: "App mobile do Dima em .NET MAUI Blazor Hybrid, reaproveitando 100% do Core compartilhado com a Web. Autenticação JWT com tokens em SecureStorage (Android Keystore), CRUD completo de lançamentos com recorrência e dashboard com gráficos. APK Android disponível na release do GitHub.",
+      title: dict.projects.list.dimaMobile.title,
+      description: dict.projects.list.dimaMobile.description,
+      category: dict.projects.list.dimaMobile.category,
       technologies: [".NET 9", ".NET MAUI", "Blazor Hybrid", "MudBlazor", "JWT"],
-      category: "Mobile",
-      status: "Concluído",
+      status: dict.projects.status.completed,
       icon: Smartphone,
       gradient: "from-blue-600 to-indigo-600",
       github: "https://github.com/Mathows/dima-controle-financeiro",
-      demo: "https://github.com/Mathows/dima-controle-financeiro/releases/latest"
+      demo: "https://github.com/Mathows/dima-controle-financeiro/releases/latest" as string | null
     },
     {
       id: 3,
-      title: "Vieira Solutions",
-      description: "Site institucional e landing page para agência digital, com formulário de contato que persiste leads no banco, dispara e-mails automáticos (notificação interna + auto-resposta via MailKit) e redireciona o cliente para o WhatsApp com mensagem pré-formatada.",
+      title: dict.projects.list.vieira.title,
+      description: dict.projects.list.vieira.description,
+      category: dict.projects.list.vieira.category,
       technologies: [".NET 10", "Blazor WASM", "MudBlazor", "EF Core", "SQL Server", "MailKit"],
-      category: "Web",
-      status: "Concluído",
+      status: dict.projects.status.completed,
       icon: Megaphone,
       gradient: "from-purple-600 to-pink-600",
       github: "https://github.com/Mathows/vieira-solutions",
-      demo: null
+      demo: null as string | null
     }
   ];
 
@@ -81,10 +83,11 @@ const ProjectsSection = () => {
           {/* Section Title */}
           <motion.div variants={itemVariants} className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Meus <span className="text-blue-600">Projetos</span>
+              {dict.projects.titlePrefix}
+              <span className="text-blue-600">{dict.projects.titleHighlight}</span>
             </h2>
             <p className="text-xl text-white max-w-2xl mx-auto mb-6">
-              Alguns dos projetos que desenvolvi utilizando as mais modernas tecnologias
+              {dict.projects.subtitle}
             </p>
             <div className="w-20 h-1 bg-gradient-primary mx-auto rounded-full" />
           </motion.div>
@@ -115,7 +118,7 @@ const ProjectsSection = () => {
                             {project.category}
                           </span>
                           <span className={`text-xs px-2 py-1 rounded-full ${
-                            project.status === 'Concluído'
+                            project.status === dict.projects.status.completed
                               ? 'bg-success/20 text-success'
                               : 'bg-warning/20 text-warning'
                           }`}>
@@ -152,16 +155,16 @@ const ProjectsSection = () => {
                       onClick={() => window.open(project.github, '_blank')}
                     >
                       <Github className="w-4 h-4 mr-2" />
-                      Código
+                      {dict.projects.buttonCode}
                     </Button>
                     {project.demo && (
                       <Button
                         size="sm"
                         className="flex-1 bg-gradient-primary hover:bg-gradient-accent text-primary-foreground transition-all duration-300"
-                        onClick={() => window.open(project.demo, '_blank')}
+                        onClick={() => window.open(project.demo!, '_blank')}
                       >
                         <ExternalLink className="w-4 h-4 mr-2" />
-                        Acesse
+                        {dict.projects.buttonAccess}
                       </Button>
                     )}
                   </div>
@@ -180,11 +183,10 @@ const ProjectsSection = () => {
           >
             <div className="bg-gradient-card backdrop-blur-sm rounded-2xl p-8 border border-border/50 max-w-2xl mx-auto">
               <h3 className="text-2xl font-bold text-foreground mb-4">
-                Interessado em colaborar?
+                {dict.projects.ctaTitle}
               </h3>
               <p className="text-foreground-muted mb-6">
-                Estou sempre aberto a novos desafios e oportunidades de colaboração.
-                Vamos conversar sobre seu próximo projeto!
+                {dict.projects.ctaSubtitle}
               </p>
               <Button
                 size="lg"
@@ -194,7 +196,7 @@ const ProjectsSection = () => {
                   if (element) element.scrollIntoView({ behavior: 'smooth' });
                 }}
               >
-                Entrar em Contato
+                {dict.projects.ctaButton}
               </Button>
             </div>
           </motion.div>

@@ -1,8 +1,12 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Building2, Calendar, MapPin, Code, Database, FileSpreadsheet, Zap, Code2, Atom, LayoutTemplate } from 'lucide-react';
+import { Building2, Calendar, MapPin, Code, Database, FileSpreadsheet, Zap } from 'lucide-react';
+import { useLanguage } from '@/lib/i18n';
+
+const achievementIcons = [Code, Database, FileSpreadsheet, Zap];
 
 const ExperienceSection = () => {
+  const { dict } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
@@ -28,27 +32,17 @@ const ExperienceSection = () => {
     }
   };
 
-  const achievements = [
-    {
-      icon: Code,
-      title: "Desenvolvimento Full Stack",
-      description: "Criação de aplicações completas usando C# .NET no backend e ASPX/DevExpress no frontend"
-    },
-    {
-      icon: Database,
-      title: "Otimização de Banco de Dados",
-      description: "Otimização de queries SQL Server e estruturação de bases de dados eficientes"
-    },
-    {
-      icon: FileSpreadsheet,
-      title: "Relatórios Avançados",
-      description: "Desenvolvimento de relatórios complexos utilizando SQL Server para análise de dados"
-    },
-    {
-      icon: Zap,
-      title: "Integração de Sistemas",
-      description: "Integração de sistemas legados com novas tecnologias e APIs externas"
-    }
+  const skills = [
+    { name: 'C#', iconClass: 'devicon-csharp-plain' },
+    { name: '.NET', iconClass: 'devicon-dotnetcore-plain' },
+    { name: '.NET MAUI', iconClass: 'devicon-dotnetcore-plain' },
+    { name: 'SQL Server', iconClass: 'devicon-microsoftsqlserver-plain' },
+    { name: 'React', iconClass: 'devicon-react-original' },
+    { name: 'Blazor', iconClass: 'devicon-blazor-original' },
+    { name: 'Java', iconClass: 'devicon-java-plain' },
+    { name: 'TypeScript', iconClass: 'devicon-typescript-plain' },
+    { name: 'Git', iconClass: 'devicon-git-plain' },
+    { name: 'Docker', iconClass: 'devicon-docker-plain' },
   ];
 
   return (
@@ -64,7 +58,8 @@ const ExperienceSection = () => {
           {/* Section Title */}
           <motion.div variants={itemVariants} className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Minha <span className="text-blue-600">Experiência</span>
+              {dict.experience.titlePrefix}
+              <span className="text-blue-600">{dict.experience.titleHighlight}</span>
             </h2>
             <div className="w-20 h-1 bg-gradient-primary mx-auto rounded-full" />
           </motion.div>
@@ -86,8 +81,8 @@ const ExperienceSection = () => {
                         <Building2 className="w-6 h-6 text-primary-foreground" />
                       </div>
                       <div>
-                        <h3 className="text-2xl font-bold text-foreground">Titaniumfix</h3>
-                        <p className="text-primary font-medium">Desenvolvedor Full Stack</p>
+                        <h3 className="text-2xl font-bold text-foreground">{dict.experience.company}</h3>
+                        <p className="text-primary font-medium">{dict.experience.role}</p>
                       </div>
                     </div>
                   </div>
@@ -96,40 +91,29 @@ const ExperienceSection = () => {
                   <div className="flex flex-wrap gap-4 mb-6 text-sm text-foreground-muted">
                     <div className="flex items-center space-x-2">
                       <Calendar className="w-4 h-4" />
-                      <span>2022 - Atual</span>
+                      <span>{dict.experience.period}</span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <MapPin className="w-4 h-4" />
-                      <span>Presencial</span>
+                      <span>{dict.experience.location}</span>
                     </div>
                   </div>
 
                   {/* Description */}
                   <div className="space-y-4">
                     <p className="text-foreground-muted leading-relaxed">
-                      Atuo como desenvolvedor full stack, com foco em desenvolvimento de sistema interno, 
-                      relatórios com DevExpress e otimização de banco de dados em SQL Server.
+                      {dict.experience.description}
                     </p>
 
                     <div className="space-y-3">
-                      <h4 className="text-foreground font-semibold">Principais Responsabilidades:</h4>
+                      <h4 className="text-foreground font-semibold">{dict.experience.responsibilitiesTitle}</h4>
                       <ul className="space-y-2 text-foreground-muted">
-                        <li className="flex items-start space-x-2">
-                          <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
-                          <span>Desenvolvimento de aplicações web usando C# .NET e DevExpress</span>
-                        </li>
-                        <li className="flex items-start space-x-2">
-                          <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
-                          <span>Análise de sistema</span>
-                        </li>
-                        <li className="flex items-start space-x-2">
-                          <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
-                          <span>Otimização de performance em SQL Server</span>
-                        </li>
-                        <li className="flex items-start space-x-2">
-                          <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
-                          <span>Desenvolvimento de relatórios com DevExpress</span>
-                        </li>
+                        {dict.experience.responsibilities.map((item) => (
+                          <li key={item} className="flex items-start space-x-2">
+                            <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
                       </ul>
                     </div>
                   </div>
@@ -143,50 +127,40 @@ const ExperienceSection = () => {
 
             {/* Achievements Grid */}
             <motion.div variants={itemVariants} className="space-y-6">
-              <h3 className="text-2xl font-bold text-foreground mb-8">Principais Conquistas</h3>
-              
+              <h3 className="text-2xl font-bold text-foreground mb-8">{dict.experience.achievementsTitle}</h3>
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {achievements.map((achievement, index) => (
-                  <motion.div
-                    key={achievement.title}
-                    variants={itemVariants}
-                    whileHover={{ scale: 1.02, y: -2 }}
-                    transition={{ duration: 0.2 }}
-                    className="bg-card/30 backdrop-blur-sm rounded-xl p-6 border border-border/30 hover:border-primary/30 transition-all duration-300"
-                  >
-                    <div className="flex items-start space-x-4">
-                      <div className="w-10 h-10 bg-gradient-accent rounded-lg flex items-center justify-center flex-shrink-0">
-                        <achievement.icon className="w-5 h-5 text-accent-foreground" />
+                {dict.experience.achievements.map((achievement, index) => {
+                  const Icon = achievementIcons[index] ?? Code;
+                  return (
+                    <motion.div
+                      key={achievement.title}
+                      variants={itemVariants}
+                      whileHover={{ scale: 1.02, y: -2 }}
+                      transition={{ duration: 0.2 }}
+                      className="bg-card/30 backdrop-blur-sm rounded-xl p-6 border border-border/30 hover:border-primary/30 transition-all duration-300"
+                    >
+                      <div className="flex items-start space-x-4">
+                        <div className="w-10 h-10 bg-gradient-accent rounded-lg flex items-center justify-center flex-shrink-0">
+                          <Icon className="w-5 h-5 text-accent-foreground" />
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-foreground mb-2">{achievement.title}</h4>
+                          <p className="text-sm text-foreground-muted leading-relaxed">
+                            {achievement.description}
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <h4 className="font-semibold text-foreground mb-2">{achievement.title}</h4>
-                        <p className="text-sm text-foreground-muted leading-relaxed">
-                          {achievement.description}
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
+                    </motion.div>
+                  );
+                })}
               </div>
 
               {/* Skills Progress */}
               <motion.div variants={itemVariants} className="mt-8">
-                <h4 className="text-lg font-semibold text-foreground mb-6">Principais Tecnologias</h4>
+                <h4 className="text-lg font-semibold text-foreground mb-6">{dict.experience.techsTitle}</h4>
                 <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                  {[
-                    { name: 'C#', iconClass: 'devicon-csharp-plain' },
-                    { name: '.NET', iconClass: 'devicon-dotnetcore-plain' },
-                    { name: '.NET MAUI', iconClass: 'devicon-dotnetcore-plain' },
-                    { name: 'SQL Server', iconClass: 'devicon-microsoftsqlserver-plain' },
-                    { name: 'React', iconClass: 'devicon-react-original' },
-                    { name: 'Blazor', iconClass: 'devicon-blazor-original' },
-                    { name: 'Java', iconClass: 'devicon-java-plain' },
-                    { name: 'TypeScript', iconClass: 'devicon-typescript-plain' },
-                    { name: 'Git', iconClass: 'devicon-git-plain' },
-                    { name: 'Docker', iconClass: 'devicon-docker-plain' },
-                   /* { name: 'Tailwind', iconClass: 'devicon-tailwindcss-original' } */
-                   
-                  ].map((skill, idx) => (
+                  {skills.map((skill, idx) => (
                     <motion.div
                       key={skill.name}
                       initial={{ opacity: 0, scale: 0.8 }}

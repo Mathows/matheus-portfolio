@@ -1,9 +1,11 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { useLanguage } from '@/lib/i18n';
 import matheusProfile from '/images/Gemini_Foto3.png';
 
 const AboutSection = () => {
+  const { dict } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
@@ -41,7 +43,7 @@ const AboutSection = () => {
         >
           <div className="grid grid-cols-1 mt-24 lg:grid-cols-2 gap-12 items-center">
             {/* Profile Image */}
-            <motion.div 
+            <motion.div
               variants={itemVariants}
               className="flex justify-center lg:justify-center order-first lg:order-last"
             >
@@ -68,16 +70,15 @@ const AboutSection = () => {
             <motion.div variants={itemVariants} className="space-y-6">
               <div className="space-y-4">
                 <h3 className="text-2xl font-semibold text-foreground">
-                  Desenvolvedor Full Stack
+                  {dict.about.role}
                 </h3>
-                
+
                 <div className="text-lg text-white leading-relaxed space-y-4">
                   <p>
-                    Sou desenvolvedor full stack há 2 anos. 
-                    Trabalho com <span className="text-blue-500 font-medium">C#, .NET, SQL Server, React, Blazor e DevExpress</span>, 
-                    criando aplicações modernas e performáticas.
+                    {dict.about.bioStart}
+                    <span className="text-blue-500 font-medium">{dict.about.bioStack}</span>
+                    {dict.about.bioEnd}
                   </p>
-                  
                 </div>
               </div>
             </motion.div>

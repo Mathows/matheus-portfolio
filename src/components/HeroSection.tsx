@@ -2,14 +2,16 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown, Code2, Database, Globe, Server, Zap, Monitor } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/lib/i18n';
 
 const HeroSection = () => {
+  const { dict } = useLanguage();
   const [currentTech, setCurrentTech] = useState(0);
-  
+
   const technologies = [
     "C# & .NET",
     "SQL Server",
-    "React & Blazor", 
+    "React & Blazor",
     "DevExpress",
     "Full Stack Development"
   ];
@@ -55,13 +57,13 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <motion.h1 
+            <motion.h1
               className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-foreground via-primary-light to-accent bg-clip-text text-transparent"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.4 }}
             >
-              Olá, eu sou
+              {dict.hero.greeting}
               <br />
               <span className="text-primary-light">Matheus Alexandre</span>
             </motion.h1>
@@ -73,7 +75,7 @@ const HeroSection = () => {
               transition={{ duration: 0.8, delay: 0.8 }}
             >
               <h2 className="text-2xl md:text-3xl font-medium text-foreground-muted mb-4">
-                Desenvolvedor Full Stack
+                {dict.hero.role}
               </h2>
               
               {/* Typing Animation */}
@@ -103,7 +105,7 @@ const HeroSection = () => {
                 size="lg"
                 className="bg-gradient-primary hover:bg-gradient-accent text-primary-foreground font-semibold px-8 py-4 rounded-full shadow-glow hover:shadow-accent transition-all duration-300 transform hover:scale-105"
               >
-                Ver Portfólio
+                {dict.hero.cta}
                 <ChevronDown className="ml-2 w-5 h-5 animate-bounce" />
               </Button>
             </motion.div>
@@ -152,7 +154,7 @@ const HeroSection = () => {
             transition={{ duration: 2, repeat: Infinity }}
             className="flex flex-col items-center text-foreground-muted"
           >
-            <span className="text-sm mb-2">Role para baixo</span>
+            <span className="text-sm mb-2">{dict.hero.scrollDown}</span>
             <ChevronDown className="w-5 h-5" />
           </motion.div>
         </motion.div>

@@ -1,24 +1,25 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/lib/i18n';
 
 const Header = () => {
+  const { language, setLanguage, dict } = useLanguage();
   const [activeSection, setActiveSection] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
 
   const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'sobre', label: 'Sobre' },
-    { id: 'experiencia', label: 'Experiência' },
-    { id: 'projetos', label: 'Projetos' },
-    { id: 'cursos', label: 'Cursos' },
-    { id: 'contato', label: 'Contato' },
+    { id: 'home', label: dict.nav.home },
+    { id: 'sobre', label: dict.nav.sobre },
+    { id: 'experiencia', label: dict.nav.experiencia },
+    { id: 'projetos', label: dict.nav.projetos },
+    { id: 'cursos', label: dict.nav.cursos },
+    { id: 'contato', label: dict.nav.contato },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
 
-      // Detect active section
       const sections = navItems.map(item => document.getElementById(item.id));
       const scrollPosition = window.scrollY + 100;
 
@@ -33,6 +34,7 @@ const Header = () => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const scrollToSection = (sectionId: string) => {
@@ -54,7 +56,7 @@ const Header = () => {
       }`}
     >
       <div className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-end">
+        <div className="flex items-center justify-end gap-6">
           {/* Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
@@ -81,6 +83,32 @@ const Header = () => {
               </motion.button>
             ))}
           </nav>
+
+          {/* Language Toggle */}
+          <div className="flex items-center bg-card/40 backdrop-blur-sm border border-border/50 rounded-full p-1 text-xs font-semibold">
+            <button
+              onClick={() => setLanguage('pt')}
+              className={`px-3 py-1 rounded-full transition-colors duration-200 ${
+                language === 'pt'
+                  ? 'bg-gradient-primary text-primary-foreground shadow-glow'
+                  : 'text-foreground-muted hover:text-foreground'
+              }`}
+              aria-label="Português"
+            >
+              PT
+            </button>
+            <button
+              onClick={() => setLanguage('en')}
+              className={`px-3 py-1 rounded-full transition-colors duration-200 ${
+                language === 'en'
+                  ? 'bg-gradient-primary text-primary-foreground shadow-glow'
+                  : 'text-foreground-muted hover:text-foreground'
+              }`}
+              aria-label="English"
+            >
+              EN
+            </button>
+          </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">

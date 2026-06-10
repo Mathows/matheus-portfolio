@@ -58,7 +58,7 @@ const ProjectsSection = () => {
       gradient: "from-emerald-600 to-teal-600",
       github: "https://github.com/Mathows/dima-controle-financeiro",
       demo: "https://black-sand-042c6dc03.7.azurestaticapps.net",
-      image: null, // drop a screenshot at public/images/projects/dima-web.png and set this to '/images/projects/dima-web.png'
+      image: "/images/projects/dima-web.jpg",
       featured: true,
     },
     {

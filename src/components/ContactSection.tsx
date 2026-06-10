@@ -1,11 +1,42 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { Mail, Github, Linkedin, Send, MapPin, Phone } from 'lucide-react';
+import { Github, Linkedin, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/lib/i18n';
+
+// Valid Brazilian area codes (DDDs) per Anatel
+const VALID_DDDS = new Set([
+  11, 12, 13, 14, 15, 16, 17, 18, 19,
+  21, 22, 24, 27, 28,
+  31, 32, 33, 34, 35, 37, 38,
+  41, 42, 43, 44, 45, 46, 47, 48, 49,
+  51, 53, 54, 55,
+  61, 62, 63, 64, 65, 66, 67, 68, 69,
+  71, 73, 74, 75, 77, 79,
+  81, 82, 83, 84, 85, 86, 87, 88, 89,
+  91, 92, 93, 94, 95, 96, 97, 98, 99,
+]);
+
+function formatPhone(value: string): string {
+  const digits = value.replace(/\D/g, '').slice(0, 11);
+  if (digits.length <= 2) return digits;
+  if (digits.length <= 6) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+  if (digits.length <= 10) return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
+  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+}
+
+function isValidPhone(value: string): boolean {
+  const digits = value.replace(/\D/g, '');
+  if (digits.length !== 10 && digits.length !== 11) return false;
+  const ddd = parseInt(digits.slice(0, 2), 10);
+  if (!VALID_DDDS.has(ddd)) return false;
+  // mobile (11 digits) must start with 9 after DDD; landline (10 digits) starts with 2-5
+  if (digits.length === 11 && digits[2] !== '9') return false;
+  return true;
+}
 
 const ContactSection = () => {
   const { dict } = useLanguage();
@@ -16,6 +47,7 @@ const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -63,16 +95,26 @@ const ContactSection = () => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: name === 'phone' ? formatPhone(value) : value
     }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!isValidPhone(formData.phone)) {
+      toast({
+        title: dict.contact.toastInvalidPhoneTitle,
+        description: dict.contact.toastInvalidPhoneDescription,
+        variant: 'destructive',
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      const text = `${dict.contact.whatsappGreeting} ${formData.name}.\n\n${dict.contact.whatsappMessage} ${formData.message}`;
+      const text = `${dict.contact.whatsappGreeting} ${formData.name}.\n\n${dict.contact.whatsappPhone} ${formData.phone}\n${dict.contact.whatsappMessage} ${formData.message}`;
       const encodedText = encodeURIComponent(text);
       const whatsappUrl = `https://api.whatsapp.com/send/?phone=5512978149796&text=${encodedText}&type=phone_number&app_absent=0`;
 
@@ -83,7 +125,7 @@ const ContactSection = () => {
         description: dict.contact.toastDescription,
       });
 
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({ name: '', email: '', phone: '', message: '' });
     } finally {
       setIsSubmitting(false);
     }
@@ -103,7 +145,7 @@ const ContactSection = () => {
           <motion.div variants={itemVariants} className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
               {dict.contact.titlePrefix}
-              <span className="text-primary">{dict.contact.titleHighlight}</span>
+              {dict.contact.titleHighlight}
             </h2>
             <p className="text-xl text-foreground-muted max-w-2xl mx-auto mb-6">
               {dict.contact.subtitle}
@@ -111,83 +153,19 @@ const ContactSection = () => {
             <div className="w-20 h-1 bg-gradient-primary mx-auto rounded-full" />
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="max-w-3xl mx-auto space-y-12">
 
             {/* Contact Info */}
-            <motion.div variants={itemVariants} className="space-y-8">
-              <div>
-                <h3 className="text-2xl font-bold text-foreground mb-6">{dict.contact.infoTitle}</h3>
-                <p className="text-foreground-muted leading-relaxed mb-8">
-                  {dict.contact.infoText}
-                </p>
-              </div>
-
-              {/* Contact Details */}
-              <div className="space-y-6">
-                <motion.div
-                  whileHover={{ x: 5 }}
-                  className="flex items-center space-x-4 p-4 bg-card/30 backdrop-blur-sm rounded-lg border border-border/30 hover:border-primary/30 transition-all duration-300"
-                >
-                  <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center shadow-glow">
-                    <Mail className="w-6 h-6 text-primary-foreground" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground">{dict.contact.emailLabel}</h4>
-                    <p className="text-foreground-muted">matheusalexmc@gmail.com</p>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  whileHover={{ x: 5 }}
-                  className="flex items-center space-x-4 p-4 bg-card/30 backdrop-blur-sm rounded-lg border border-border/30 hover:border-primary/30 transition-all duration-300"
-                >
-                  <div className="w-12 h-12 bg-gradient-accent rounded-lg flex items-center justify-center shadow-glow">
-                    <MapPin className="w-6 h-6 text-accent-foreground" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground">{dict.contact.locationLabel}</h4>
-                    <p className="text-foreground-muted">{dict.contact.locationValue}</p>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  whileHover={{ x: 5 }}
-                  className="flex items-center space-x-4 p-4 bg-card/30 backdrop-blur-sm rounded-lg border border-border/30 hover:border-primary/30 transition-all duration-300"
-                >
-                  <div className="w-12 h-12 bg-gradient-to-r from-green-600 to-teal-600 rounded-lg flex items-center justify-center shadow-glow">
-                    <Phone className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground">{dict.contact.availabilityLabel}</h4>
-                    <p className="text-foreground-muted">{dict.contact.availabilityValue}</p>
-                  </div>
-                </motion.div>
-              </div>
-
-              {/* Social Links */}
-              <div className="pt-8">
-                <h4 className="font-semibold text-foreground mb-4">{dict.contact.socialTitle}</h4>
-                <div className="flex space-x-4">
-                  {socialLinks.map((social) => (
-                    <motion.a
-                      key={social.name}
-                      href={social.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.1, y: -2 }}
-                      whileTap={{ scale: 0.95 }}
-                      className={`w-12 h-12 flex items-center justify-center rounded-lg bg-card/50 border border-border/50 transition-all duration-300 ${social.bgColor} ${social.color}`}
-                    >
-                      <social.icon className="w-5 h-5" />
-                    </motion.a>
-                  ))}
-                </div>
-              </div>
+            <motion.div variants={itemVariants}>
+              <h3 className="text-2xl font-bold text-foreground mb-6">{dict.contact.infoTitle}</h3>
+              <p className="text-foreground-muted leading-relaxed">
+                {dict.contact.infoText}
+              </p>
             </motion.div>
 
             {/* Contact Form */}
             <motion.div variants={itemVariants}>
-              <div className="bg-gradient-card backdrop-blur-sm rounded-2xl p-8 border border-border/50 shadow-card">
+              <div className="rounded-2xl p-8 border border-primary/40 hover:border-primary/70 transition-all duration-300">
                 <h3 className="text-2xl font-bold text-foreground mb-6">{dict.contact.formTitle}</h3>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -222,6 +200,25 @@ const ContactSection = () => {
                       onChange={handleInputChange}
                       className="bg-input/50 border-border/50 focus:border-primary/50 focus:ring-primary/20"
                       placeholder={dict.contact.formEmailPlaceholder}
+                    />
+                  </div>
+
+                  {/* Phone Field */}
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
+                      {dict.contact.formPhone} *
+                    </label>
+                    <Input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      required
+                      inputMode="numeric"
+                      maxLength={15}
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className="bg-input/50 border-border/50 focus:border-primary/50 focus:ring-primary/20"
+                      placeholder={dict.contact.formPhonePlaceholder}
                     />
                   </div>
 
@@ -265,6 +262,26 @@ const ContactSection = () => {
                     )}
                   </Button>
                 </form>
+              </div>
+            </motion.div>
+
+            {/* Social Links */}
+            <motion.div variants={itemVariants} className="text-center">
+              <h4 className="font-semibold text-foreground mb-4">{dict.contact.socialTitle}</h4>
+              <div className="flex justify-center space-x-4">
+                {socialLinks.map((social) => (
+                  <motion.a
+                    key={social.name}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    className={`w-12 h-12 flex items-center justify-center rounded-lg bg-card/50 border border-border/50 transition-all duration-300 ${social.bgColor} ${social.color}`}
+                  >
+                    <social.icon className="w-5 h-5" />
+                  </motion.a>
+                ))}
               </div>
             </motion.div>
           </div>

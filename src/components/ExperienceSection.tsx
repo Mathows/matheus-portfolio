@@ -1,9 +1,13 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Building2, Calendar, MapPin, Code, Database, FileSpreadsheet, Zap } from 'lucide-react';
+import { Calendar, MapPin, Smartphone, type LucideIcon } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
 
-const achievementIcons = [Code, Database, FileSpreadsheet, Zap];
+type Skill = {
+  name: string;
+  iconClass?: string;
+  Icon?: LucideIcon;
+};
 
 const ExperienceSection = () => {
   const { dict } = useLanguage();
@@ -32,15 +36,15 @@ const ExperienceSection = () => {
     }
   };
 
-  const skills = [
+  const skills: Skill[] = [
     { name: 'C#', iconClass: 'devicon-csharp-plain' },
     { name: '.NET', iconClass: 'devicon-dotnetcore-plain' },
-    { name: '.NET MAUI', iconClass: 'devicon-dotnetcore-plain' },
+    { name: '.NET MAUI', Icon: Smartphone },
     { name: 'SQL Server', iconClass: 'devicon-microsoftsqlserver-plain' },
-    { name: 'React', iconClass: 'devicon-react-original' },
     { name: 'Blazor', iconClass: 'devicon-blazor-original' },
+    { name: 'Azure', iconClass: 'devicon-azure-plain' },
     { name: 'Java', iconClass: 'devicon-java-plain' },
-    { name: 'TypeScript', iconClass: 'devicon-typescript-plain' },
+    { name: 'Spring', iconClass: 'devicon-spring-original' },
     { name: 'Git', iconClass: 'devicon-git-plain' },
     { name: 'Docker', iconClass: 'devicon-docker-plain' },
   ];
@@ -59,7 +63,7 @@ const ExperienceSection = () => {
           <motion.div variants={itemVariants} className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
               {dict.experience.titlePrefix}
-              <span className="text-primary">{dict.experience.titleHighlight}</span>
+              {dict.experience.titleHighlight}
             </h2>
             <div className="w-20 h-1 bg-gradient-primary mx-auto rounded-full" />
           </motion.div>
@@ -72,19 +76,12 @@ const ExperienceSection = () => {
                 <motion.div
                   whileHover={{ y: -5 }}
                   transition={{ duration: 0.3 }}
-                  className="bg-gradient-card backdrop-blur-sm rounded-2xl p-8 border border-border/50 shadow-card hover:shadow-card-hover transition-all duration-300"
+                  className="rounded-2xl p-8 border border-primary/40 hover:border-primary/70 transition-all duration-300"
                 >
                   {/* Company Header */}
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center shadow-glow">
-                        <Building2 className="w-6 h-6 text-primary-foreground" />
-                      </div>
-                      <div>
-                        <h3 className="text-2xl font-bold text-foreground">{dict.experience.company}</h3>
-                        <p className="text-primary font-medium">{dict.experience.role}</p>
-                      </div>
-                    </div>
+                  <div className="mb-6">
+                    <h3 className="text-2xl font-bold text-foreground">{dict.experience.company}</h3>
+                    <p className="text-primary font-medium">{dict.experience.role}</p>
                   </div>
 
                   {/* Period and Location */}
@@ -130,30 +127,20 @@ const ExperienceSection = () => {
               <h3 className="text-2xl font-bold text-foreground mb-8">{dict.experience.achievementsTitle}</h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {dict.experience.achievements.map((achievement, index) => {
-                  const Icon = achievementIcons[index] ?? Code;
-                  return (
-                    <motion.div
-                      key={achievement.title}
-                      variants={itemVariants}
-                      whileHover={{ scale: 1.02, y: -2 }}
-                      transition={{ duration: 0.2 }}
-                      className="bg-card/30 backdrop-blur-sm rounded-xl p-6 border border-border/30 hover:border-primary/30 transition-all duration-300"
-                    >
-                      <div className="flex items-start space-x-4">
-                        <div className="w-10 h-10 bg-gradient-accent rounded-lg flex items-center justify-center flex-shrink-0">
-                          <Icon className="w-5 h-5 text-accent-foreground" />
-                        </div>
-                        <div>
-                          <h4 className="font-semibold text-foreground mb-2">{achievement.title}</h4>
-                          <p className="text-sm text-foreground-muted leading-relaxed">
-                            {achievement.description}
-                          </p>
-                        </div>
-                      </div>
-                    </motion.div>
-                  );
-                })}
+                {dict.experience.achievements.map((achievement) => (
+                  <motion.div
+                    key={achievement.title}
+                    variants={itemVariants}
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    transition={{ duration: 0.2 }}
+                    className="rounded-xl p-6 border border-primary/40 hover:border-primary/70 transition-all duration-300"
+                  >
+                    <h4 className="font-semibold text-foreground mb-2">{achievement.title}</h4>
+                    <p className="text-sm text-foreground-muted leading-relaxed">
+                      {achievement.description}
+                    </p>
+                  </motion.div>
+                ))}
               </div>
 
               {/* Skills Progress */}
@@ -169,7 +156,11 @@ const ExperienceSection = () => {
                       whileHover={{ scale: 1.05, y: -2 }}
                       className="flex flex-col items-center justify-center p-6 rounded-xl border border-primary/30 bg-card hover:bg-card-hover hover:border-primary hover:shadow-glow transition-all duration-300 group cursor-pointer"
                     >
-                      <i className={`${skill.iconClass} text-5xl text-foreground-muted group-hover:text-primary transition-colors duration-300 mb-4`} />
+                      {skill.Icon ? (
+                        <skill.Icon className="w-12 h-12 text-foreground-muted group-hover:text-primary transition-colors duration-300 mb-4" />
+                      ) : (
+                        <i className={`${skill.iconClass} text-5xl text-foreground-muted group-hover:text-primary transition-colors duration-300 mb-4`} />
+                      )}
                       <span className="text-sm font-bold text-foreground-muted group-hover:text-foreground transition-colors duration-300 text-center">
                         {skill.name}
                       </span>

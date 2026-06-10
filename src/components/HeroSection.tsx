@@ -1,8 +1,15 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown, Code2, Database, Globe, Server, Zap, Monitor } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { ChevronDown, Smartphone, type LucideIcon } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { useLanguage } from '@/lib/i18n';
+
+type TechIcon = {
+  name: string;
+  label: string;
+  iconClass?: string;
+  Icon?: LucideIcon;
+};
 
 const HeroSection = () => {
   const { dict } = useLanguage();
@@ -11,34 +18,27 @@ const HeroSection = () => {
   const technologies = [
     "C# & .NET",
     "SQL Server",
-    "React & Blazor",
-    "DevExpress",
+    "Blazor & .NET MAUI",
+    "Microsoft Azure",
     "Full Stack Development"
   ];
 
-  const techIcons = [
-    { icon: Code2, name: "C#" },
-    { icon: Database, name: "SQL" },
-    { icon: Globe, name: "React" },
-    { icon: Monitor, name: "Blazor" },
-    { icon: Server, name: ".NET" },
-    { icon: Zap, name: "DevExpress" },
+  const techIcons: TechIcon[] = [
+    { iconClass: "devicon-csharp-plain", name: "C#", label: "C#" },
+    { iconClass: "devicon-dotnetcore-plain", name: ".NET", label: ".NET / ASP.NET Core" },
+    { Icon: Smartphone, name: ".NET MAUI", label: ".NET MAUI" },
+    { iconClass: "devicon-microsoftsqlserver-plain", name: "SQL Server", label: "SQL Server" },
+    { iconClass: "devicon-blazor-original", name: "Blazor", label: "Blazor" },
+    { iconClass: "devicon-azure-plain", name: "Azure", label: "Microsoft Azure" },
   ];
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTech((prev) => (prev + 1) % technologies.length);
     }, 3000);
-    
+
     return () => clearInterval(interval);
   }, []);
-
-  const scrollToProjects = () => {
-    const element = document.getElementById('projetos');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background">
@@ -68,7 +68,7 @@ const HeroSection = () => {
             </motion.h1>
 
             <motion.div
-              className="mb-8"
+              className="mb-20"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.8 }}
@@ -92,23 +92,6 @@ const HeroSection = () => {
               </div>
             </motion.div>
 
-            {/* CTA Button */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.2 }}
-              className="mb-12"
-            >
-              <Button
-                onClick={scrollToProjects}
-                size="lg"
-                className="bg-gradient-primary hover:bg-gradient-accent text-primary-foreground font-semibold px-8 py-4 rounded-full shadow-glow hover:shadow-accent transition-all duration-300 transform hover:scale-105"
-              >
-                {dict.hero.cta}
-                <ChevronDown className="ml-2 w-5 h-5 animate-bounce" />
-              </Button>
-            </motion.div>
-
             {/* Tech Icons */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -117,25 +100,35 @@ const HeroSection = () => {
               className="flex flex-wrap justify-center gap-6 max-w-md mx-auto mb-24"
             >
               {techIcons.map((tech, index) => (
-                <motion.div
-                  key={tech.name}
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{
-                    duration: 0.5,
-                    delay: 1.6 + index * 0.1,
-                    type: "spring",
-                    stiffness: 200
-                  }}
-                  whileHover={{
-                    scale: 1.2,
-                    y: -5,
-                    transition: { duration: 0.2 }
-                  }}
-                  className="p-3 bg-card/50 backdrop-blur-sm rounded-lg border border-border/50 hover:border-primary/50 transition-all duration-300 group cursor-pointer"
-                >
-                  <tech.icon className="w-6 h-6 text-foreground-muted group-hover:text-primary transition-colors duration-300" />
-                </motion.div>
+                <Tooltip key={tech.name}>
+                  <TooltipTrigger asChild>
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{
+                        duration: 0.5,
+                        delay: 1.6 + index * 0.1,
+                        type: "spring",
+                        stiffness: 200
+                      }}
+                      whileHover={{
+                        scale: 1.2,
+                        y: -5,
+                        transition: { duration: 0.2 }
+                      }}
+                      className="p-3 bg-card/50 backdrop-blur-sm rounded-lg border border-border/50 hover:border-primary/50 transition-all duration-300 group cursor-pointer flex items-center justify-center"
+                    >
+                      {tech.Icon ? (
+                        <tech.Icon className="w-6 h-6 text-foreground-muted group-hover:text-primary transition-colors duration-300" />
+                      ) : (
+                        <i className={`${tech.iconClass} text-2xl text-foreground-muted group-hover:text-primary transition-colors duration-300`} />
+                      )}
+                    </motion.div>
+                  </TooltipTrigger>
+                  <TooltipContent side="bottom" className="bg-card border-border text-foreground font-medium">
+                    {tech.label}
+                  </TooltipContent>
+                </Tooltip>
               ))}
             </motion.div>
 

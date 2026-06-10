@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { GraduationCap, Calendar, Award, BookOpen, Code, Database, Globe, TrendingUp } from 'lucide-react';
+import { GraduationCap, Award } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/lib/i18n';
 
@@ -36,78 +36,54 @@ const CoursesSection = () => {
       id: 1,
       title: dict.courses.list.blazorWasm.title,
       institution: "balta.io",
-      date: "08/01/2024",
-      level: "Basic",
       categoryKey: "Frontend" as const,
       description: dict.courses.list.blazorWasm.description,
       topics: ["C#", "Blazor", "WebAssembly"],
-      icon: Globe,
-      gradient: "from-blue-600 to-indigo-600",
       link: "https://balta.io/certificados/9765ce52-74fd-4540-a4f1-c8c61c5cf3aa"
     },
     {
       id: 2,
       title: dict.courses.list.blazorServer.title,
       institution: "balta.io",
-      date: "13/12/2023",
-      level: "Basic",
       categoryKey: "Full Stack" as const,
       description: dict.courses.list.blazorServer.description,
       topics: ["C#", "Blazor Server", "SignalR"],
-      icon: Code,
-      gradient: "from-violet-600 to-purple-600",
       link: "https://balta.io/certificados/8f1f3c89-615d-424a-8f3b-f51938bab7bf"
     },
     {
       id: 3,
       title: dict.courses.list.aspnet6.title,
       institution: "balta.io",
-      date: "31/10/2023",
-      level: "Intermediate",
       categoryKey: "Backend" as const,
       description: dict.courses.list.aspnet6.description,
       topics: ["C#", "ASP.NET Core", "APIs REST"],
-      icon: Code,
-      gradient: "from-green-600 to-teal-600",
       link: "https://balta.io/certificados/5e192151-59b8-4ed7-911f-5c47daae8206"
     },
     {
       id: 4,
       title: dict.courses.list.razorPages.title,
       institution: "balta.io",
-      date: "23/10/2023",
-      level: "Basic",
       categoryKey: "Full Stack" as const,
       description: dict.courses.list.razorPages.description,
       topics: ["C#", "Razor Pages", "ASP.NET"],
-      icon: BookOpen,
-      gradient: "from-orange-600 to-red-600",
       link: "https://balta.io/certificados/ce3d41c1-3643-4fdb-991f-60ea206e9fbd"
     },
     {
       id: 5,
       title: dict.courses.list.ef.title,
       institution: "balta.io",
-      date: "19/07/2023",
-      level: "Basic",
       categoryKey: "Database" as const,
       description: dict.courses.list.ef.description,
       topics: ["C#", "Entity Framework", "ORM"],
-      icon: Database,
-      gradient: "from-cyan-600 to-blue-600",
       link: "https://balta.io/certificados/42e8b54a-9f05-46b2-add2-dcfee3516b9f"
     },
     {
       id: 6,
       title: dict.courses.list.dapper.title,
       institution: "balta.io",
-      date: "31/05/2023",
-      level: "Beginner",
       categoryKey: "Database" as const,
       description: dict.courses.list.dapper.description,
       topics: ["C#", "Dapper", "SQL Server"],
-      icon: Database,
-      gradient: "from-blue-600 to-cyan-600",
       link: "https://balta.io/certificados/e40e6e2f-92ff-4a7f-ad28-3272d3e50de4"
     }
   ];
@@ -128,7 +104,7 @@ const CoursesSection = () => {
               <GraduationCap className="w-12 h-12 text-primary mr-4" />
               <h2 className="text-4xl md:text-5xl font-bold text-foreground">
                 {dict.courses.titlePrefix}
-                <span className="text-primary">{dict.courses.titleHighlight}</span>
+                {dict.courses.titleHighlight}
               </h2>
             </div>
             <p className="text-xl text-foreground-muted max-w-2xl mx-auto mb-6">
@@ -147,12 +123,9 @@ const CoursesSection = () => {
                 transition={{ duration: 0.3 }}
                 className="group relative h-full"
               >
-                <div className="bg-gradient-card backdrop-blur-sm rounded-2xl p-6 border border-border/50 shadow-card hover:shadow-card-hover transition-all duration-500 h-full flex flex-col">
+                <div className="rounded-2xl p-6 border border-primary/40 hover:border-primary/70 transition-all duration-500 h-full flex flex-col">
                   {/* Course Header */}
-                  <div className="flex items-start justify-between mb-4">
-                    <div className={`w-12 h-12 bg-gradient-to-r ${course.gradient} rounded-xl flex items-center justify-center shadow-glow flex-shrink-0`}>
-                      <course.icon className="w-6 h-6 text-white" />
-                    </div>
+                  <div className="flex justify-end mb-4">
                     <div className="px-2 py-1 rounded-full text-xs border bg-success/20 text-success border-success/30">
                       {dict.courses.status.completed}
                     </div>
@@ -163,17 +136,6 @@ const CoursesSection = () => {
                     <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
                       {course.title}
                     </h3>
-
-                    <div className="flex items-center space-x-4 text-sm text-foreground-muted mb-4">
-                      <div className="flex items-center space-x-1">
-                        <Calendar className="w-4 h-4" />
-                        <span>{course.date}</span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <TrendingUp className="w-4 h-4" />
-                        <span>{course.level}</span>
-                      </div>
-                    </div>
 
                     <div className="mb-4">
                       <span className="text-primary font-medium text-sm">{course.institution}</span>
@@ -220,29 +182,6 @@ const CoursesSection = () => {
             ))}
           </div>
 
-          {/* Learning Goals */}
-          <motion.div
-            variants={itemVariants}
-            className="text-center"
-          >
-            <div className="bg-gradient-card backdrop-blur-sm rounded-2xl p-8 border border-border/50 max-w-4xl mx-auto">
-              <h3 className="text-2xl font-bold text-foreground mb-4">
-                {dict.courses.goalsTitle}
-              </h3>
-              <p className="text-foreground-muted mb-6">
-                {dict.courses.goalsSubtitle}
-              </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                {dict.courses.goals.map((goal) => (
-                  <div key={goal.title} className="p-4 bg-card/30 rounded-lg border border-border/30">
-                    <h4 className="font-semibold text-foreground mb-2">{goal.title}</h4>
-                    <p className="text-sm text-foreground-muted">{goal.description}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
         </motion.div>
       </div>
     </section>

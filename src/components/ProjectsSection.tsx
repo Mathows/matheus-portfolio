@@ -1,8 +1,23 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { ExternalLink, Github, Wallet, Smartphone, Megaphone } from 'lucide-react';
+import { ExternalLink, Github, Wallet, Smartphone, Megaphone, Sparkles, type LucideIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/lib/i18n';
+
+type Project = {
+  id: number;
+  title: string;
+  description: string;
+  category: string;
+  technologies: string[];
+  status: string;
+  icon: LucideIcon;
+  gradient: string;
+  github: string;
+  demo: string | null;
+  image: string | null; // path under /public, e.g. '/images/projects/dima-web.png'
+  featured: boolean;
+};
 
 const ProjectsSection = () => {
   const { dict } = useLanguage();
@@ -31,18 +46,20 @@ const ProjectsSection = () => {
     }
   };
 
-  const projects = [
+  const projects: Project[] = [
     {
       id: 1,
       title: dict.projects.list.dima.title,
       description: dict.projects.list.dima.description,
       category: dict.projects.list.dima.category,
-      technologies: [".NET 8", "Blazor WASM", "MudBlazor", "EF Core", "SQL Server", "Stripe"],
+      technologies: [".NET 8", "Blazor WASM", "MudBlazor", "EF Core", "SQL Server", "Stripe", "Azure"],
       status: dict.projects.status.completed,
       icon: Wallet,
       gradient: "from-emerald-600 to-teal-600",
       github: "https://github.com/Mathows/dima-controle-financeiro",
-      demo: "https://black-sand-042c6dc03.7.azurestaticapps.net" as string | null
+      demo: "https://black-sand-042c6dc03.7.azurestaticapps.net",
+      image: null, // drop a screenshot at public/images/projects/dima-web.png and set this to '/images/projects/dima-web.png'
+      featured: true,
     },
     {
       id: 2,
@@ -54,7 +71,9 @@ const ProjectsSection = () => {
       icon: Smartphone,
       gradient: "from-blue-600 to-indigo-600",
       github: "https://github.com/Mathows/dima-controle-financeiro",
-      demo: "https://github.com/Mathows/dima-controle-financeiro/releases/latest" as string | null
+      demo: "https://github.com/Mathows/dima-controle-financeiro/releases/latest",
+      image: null,
+      featured: false,
     },
     {
       id: 3,
@@ -66,9 +85,55 @@ const ProjectsSection = () => {
       icon: Megaphone,
       gradient: "from-purple-600 to-pink-600",
       github: "https://github.com/Mathows/vieira-solutions",
-      demo: null as string | null
+      demo: null,
+      image: null,
+      featured: false,
     }
   ];
+
+  const featuredProjects = projects.filter((p) => p.featured);
+  const otherProjects = projects.filter((p) => !p.featured);
+
+  const ProjectVisual = ({ project, className = '' }: { project: Project; className?: string }) => (
+    <div className={`relative overflow-hidden rounded-xl ${className}`}>
+      {project.image ? (
+        <img
+          src={project.image}
+          alt={project.title}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+      ) : (
+        <div className={`w-full h-full bg-gradient-to-br ${project.gradient} flex items-center justify-center transition-transform duration-500 group-hover:scale-105`}>
+          <project.icon className="w-20 h-20 text-white/30" strokeWidth={1.5} />
+        </div>
+      )}
+      <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent pointer-events-none" />
+    </div>
+  );
+
+  const ProjectActions = ({ project }: { project: Project }) => (
+    <div className="flex space-x-3">
+      <Button
+        variant="outline"
+        size="sm"
+        className="flex-1 border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-all duration-300"
+        onClick={() => window.open(project.github, '_blank')}
+      >
+        <Github className="w-4 h-4 mr-2" />
+        {dict.projects.buttonCode}
+      </Button>
+      {project.demo && (
+        <Button
+          size="sm"
+          className="flex-1 bg-gradient-primary hover:bg-gradient-accent text-primary-foreground transition-all duration-300"
+          onClick={() => window.open(project.demo!, '_blank')}
+        >
+          <ExternalLink className="w-4 h-4 mr-2" />
+          {dict.projects.buttonAccess}
+        </Button>
+      )}
+    </div>
+  );
 
   return (
     <section id="projetos" className="py-20 relative">
@@ -84,7 +149,7 @@ const ProjectsSection = () => {
           <motion.div variants={itemVariants} className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
               {dict.projects.titlePrefix}
-              <span className="text-primary">{dict.projects.titleHighlight}</span>
+              {dict.projects.titleHighlight}
             </h2>
             <p className="text-xl text-foreground max-w-2xl mx-auto mb-6">
               {dict.projects.subtitle}
@@ -92,114 +157,130 @@ const ProjectsSection = () => {
             <div className="w-20 h-1 bg-gradient-primary mx-auto rounded-full" />
           </motion.div>
 
-          {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            {projects.map((project) => (
-              <motion.div
-                key={project.id}
-                variants={itemVariants}
-                whileHover={{ y: -10, scale: 1.02 }}
-                transition={{ duration: 0.3 }}
-                className="group relative"
-              >
-                <div className="bg-gradient-card backdrop-blur-sm rounded-2xl p-8 border border-border/50 shadow-card hover:shadow-card-hover transition-all duration-500 h-full flex flex-col">
-                  {/* Project Header */}
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="flex items-center space-x-4">
-                      <div className={`w-12 h-12 bg-gradient-to-r ${project.gradient} rounded-xl flex items-center justify-center shadow-glow flex-shrink-0`}>
-                        <project.icon className="w-6 h-6 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
-                          {project.title}
-                        </h3>
-                        <div className="flex items-center space-x-2 mt-1">
-                          <span className="text-xs px-2 py-1 bg-primary/20 text-primary rounded-full">
-                            {project.category}
-                          </span>
-                          <span className={`text-xs px-2 py-1 rounded-full ${
-                            project.status === dict.projects.status.completed
-                              ? 'bg-success/20 text-success'
-                              : 'bg-warning/20 text-warning'
-                          }`}>
-                            {project.status}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Project Description */}
-                  <p className="text-foreground-muted leading-relaxed mb-6 flex-1">
-                    {project.description}
-                  </p>
-
-                  {/* Technologies */}
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1 bg-border/30 text-foreground text-xs rounded-full border border-border/50 hover:border-primary/30 transition-all duration-300"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Project Actions */}
-                  <div className="flex space-x-3 mt-auto">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="flex-1 border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-all duration-300"
-                      onClick={() => window.open(project.github, '_blank')}
-                    >
-                      <Github className="w-4 h-4 mr-2" />
-                      {dict.projects.buttonCode}
-                    </Button>
-                    {project.demo && (
-                      <Button
-                        size="sm"
-                        className="flex-1 bg-gradient-primary hover:bg-gradient-accent text-primary-foreground transition-all duration-300"
-                        onClick={() => window.open(project.demo!, '_blank')}
-                      >
-                        <ExternalLink className="w-4 h-4 mr-2" />
-                        {dict.projects.buttonAccess}
-                      </Button>
-                    )}
-                  </div>
-
-                  {/* Hover Effect Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-accent/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                </div>
+          {/* Featured Projects */}
+          {featuredProjects.length > 0 && (
+            <div className="mb-20">
+              <motion.div variants={itemVariants} className="flex items-center gap-3 mb-8">
+                <Sparkles className="w-5 h-5 text-primary" />
+                <h3 className="text-2xl font-bold text-foreground">{dict.projects.featuredHeading}</h3>
+                <div className="flex-1 h-px bg-border/50" />
               </motion.div>
-            ))}
-          </div>
 
-          {/* Call to Action */}
-          <motion.div
-            variants={itemVariants}
-            className="text-center"
-          >
-            <div className="bg-gradient-card backdrop-blur-sm rounded-2xl p-8 border border-border/50 max-w-2xl mx-auto">
-              <h3 className="text-2xl font-bold text-foreground mb-4">
-                {dict.projects.ctaTitle}
-              </h3>
-              <p className="text-foreground-muted mb-6">
-                {dict.projects.ctaSubtitle}
-              </p>
-              <Button
-                size="lg"
-                className="bg-gradient-primary hover:bg-gradient-accent text-primary-foreground font-semibold px-8 py-3 rounded-full shadow-glow hover:shadow-accent transition-all duration-300"
-                onClick={() => {
-                  const element = document.getElementById('contato');
-                  if (element) element.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
-                {dict.projects.ctaButton}
-              </Button>
+              <div className="space-y-8">
+                {featuredProjects.map((project) => (
+                  <motion.article
+                    key={project.id}
+                    variants={itemVariants}
+                    whileHover={{ y: -6 }}
+                    transition={{ duration: 0.3 }}
+                    className="group relative grid grid-cols-1 lg:grid-cols-5 gap-8 rounded-3xl p-6 lg:p-8 border border-primary/40 hover:border-primary/70 transition-all duration-500"
+                  >
+                    {/* Visual */}
+                    <div className="lg:col-span-3 aspect-video lg:aspect-auto lg:min-h-[320px]">
+                      <ProjectVisual project={project} className="w-full h-full" />
+                    </div>
+
+                    {/* Content */}
+                    <div className="lg:col-span-2 flex flex-col">
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="text-[10px] font-bold tracking-wider px-2 py-1 bg-gradient-primary text-primary-foreground rounded-full">
+                          {dict.projects.featuredBadge}
+                        </span>
+                        <span className="text-xs px-2 py-1 bg-primary/15 text-primary rounded-full">
+                          {project.category}
+                        </span>
+                        <span className="text-xs px-2 py-1 bg-success/15 text-success rounded-full">
+                          {project.status}
+                        </span>
+                      </div>
+
+                      <h4 className="text-2xl lg:text-3xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
+                        {project.title}
+                      </h4>
+
+                      <p className="text-foreground-muted leading-relaxed mb-5 flex-1">
+                        {project.description}
+                      </p>
+
+                      <div className="flex flex-wrap gap-2 mb-6">
+                        {project.technologies.map((tech) => (
+                          <span
+                            key={tech}
+                            className="px-3 py-1 bg-border/30 text-foreground text-xs rounded-full border border-border/50 hover:border-primary/30 transition-all duration-300"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+
+                      <ProjectActions project={project} />
+                    </div>
+                  </motion.article>
+                ))}
+              </div>
             </div>
-          </motion.div>
+          )}
+
+          {/* All Other Projects */}
+          {otherProjects.length > 0 && (
+            <div className="mb-16">
+              <motion.div variants={itemVariants} className="flex items-center gap-3 mb-8">
+                <h3 className="text-2xl font-bold text-foreground">{dict.projects.allHeading}</h3>
+                <div className="flex-1 h-px bg-border/50" />
+              </motion.div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {otherProjects.map((project) => (
+                  <motion.article
+                    key={project.id}
+                    variants={itemVariants}
+                    whileHover={{ y: -8 }}
+                    transition={{ duration: 0.3 }}
+                    className="group flex flex-col rounded-2xl border border-primary/40 hover:border-primary/70 transition-all duration-500 overflow-hidden"
+                  >
+                    {/* Visual */}
+                    <div className="aspect-video">
+                      <ProjectVisual project={project} className="w-full h-full rounded-none" />
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-6 flex flex-col flex-1">
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="text-xs px-2 py-1 bg-primary/15 text-primary rounded-full">
+                          {project.category}
+                        </span>
+                        <span className="text-xs px-2 py-1 bg-success/15 text-success rounded-full">
+                          {project.status}
+                        </span>
+                      </div>
+
+                      <h4 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
+                        {project.title}
+                      </h4>
+
+                      <p className="text-foreground-muted text-sm leading-relaxed mb-5 flex-1">
+                        {project.description}
+                      </p>
+
+                      <div className="flex flex-wrap gap-2 mb-5">
+                        {project.technologies.map((tech) => (
+                          <span
+                            key={tech}
+                            className="px-2.5 py-1 bg-border/30 text-foreground text-xs rounded-full border border-border/50"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+
+                      <ProjectActions project={project} />
+                    </div>
+                  </motion.article>
+                ))}
+              </div>
+            </div>
+          )}
+
         </motion.div>
       </div>
     </section>

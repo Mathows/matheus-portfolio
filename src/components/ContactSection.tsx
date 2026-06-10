@@ -114,18 +114,32 @@ const ContactSection = () => {
     setIsSubmitting(true);
 
     try {
-      const text = `${dict.contact.whatsappGreeting} ${formData.name}.\n\n${dict.contact.whatsappPhone} ${formData.phone}\n${dict.contact.whatsappMessage} ${formData.message}`;
-      const encodedText = encodeURIComponent(text);
-      const whatsappUrl = `https://api.whatsapp.com/send/?phone=5512978149796&text=${encodedText}&type=phone_number&app_absent=0`;
-
-      window.open(whatsappUrl, '_blank');
-
-      toast({
-        title: dict.contact.toastTitle,
-        description: dict.contact.toastDescription,
+      const resp = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(formData),
       });
+      const data = (await resp.json().catch(() => ({ ok: false }))) as { ok?: boolean };
 
-      setFormData({ name: '', email: '', phone: '', message: '' });
+      if (resp.ok && data.ok) {
+        toast({
+          title: dict.contact.toastSuccessTitle,
+          description: dict.contact.toastSuccessDescription,
+        });
+        setFormData({ name: '', email: '', phone: '', message: '' });
+      } else {
+        toast({
+          title: dict.contact.toastErrorTitle,
+          description: dict.contact.toastErrorDescription,
+          variant: 'destructive',
+        });
+      }
+    } catch {
+      toast({
+        title: dict.contact.toastErrorTitle,
+        description: dict.contact.toastErrorDescription,
+        variant: 'destructive',
+      });
     } finally {
       setIsSubmitting(false);
     }

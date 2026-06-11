@@ -2,6 +2,7 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { ExternalLink, Github, Wallet, Smartphone, Megaphone, Sparkles, type LucideIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { useLanguage } from '@/lib/i18n';
 
 type Project = {
@@ -15,7 +16,7 @@ type Project = {
   gradient: string;
   github: string;
   demo: string | null;
-  image: string | null; // path under /public, e.g. '/images/projects/dima-web.png'
+  images: string[]; // paths under /public; empty = placeholder, 1 = static img, 2+ = carousel
   featured: boolean;
 };
 
@@ -58,7 +59,16 @@ const ProjectsSection = () => {
       gradient: "from-emerald-600 to-teal-600",
       github: "https://github.com/Mathows/dima-controle-financeiro",
       demo: "https://black-sand-042c6dc03.7.azurestaticapps.net",
-      image: "/images/projects/dima-web.jpg",
+      images: [
+        "/images/projects/dima/01-dashboard-overview.jpg",
+        "/images/projects/dima/02-dashboard-charts.jpg",
+        "/images/projects/dima/03-dashboard-expenses.jpg",
+        "/images/projects/dima/04-history.jpg",
+        "/images/projects/dima/05-category-income.jpg",
+        "/images/projects/dima/06-category-expense.jpg",
+        "/images/projects/dima/07-account-password.jpg",
+        "/images/projects/dima/08-forgot-password.jpg",
+      ],
       featured: true,
     },
     {
@@ -72,7 +82,7 @@ const ProjectsSection = () => {
       gradient: "from-blue-600 to-indigo-600",
       github: "https://github.com/Mathows/dima-controle-financeiro",
       demo: "https://github.com/Mathows/dima-controle-financeiro/releases/latest",
-      image: null,
+      images: [],
       featured: false,
     },
     {
@@ -85,8 +95,8 @@ const ProjectsSection = () => {
       icon: Megaphone,
       gradient: "from-purple-600 to-pink-600",
       github: "https://github.com/Mathows/vieira-solutions",
-      demo: null,
-      image: null,
+      demo: "https://solutionsvieira.com.br/",
+      images: [],
       featured: false,
     }
   ];
@@ -94,22 +104,60 @@ const ProjectsSection = () => {
   const featuredProjects = projects.filter((p) => p.featured);
   const otherProjects = projects.filter((p) => !p.featured);
 
-  const ProjectVisual = ({ project, className = '' }: { project: Project; className?: string }) => (
-    <div className={`relative overflow-hidden rounded-xl ${className}`}>
-      {project.image ? (
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-      ) : (
-        <div className={`w-full h-full bg-gradient-to-br ${project.gradient} flex items-center justify-center transition-transform duration-500 group-hover:scale-105`}>
-          <project.icon className="w-20 h-20 text-white/30" strokeWidth={1.5} />
+  const ProjectVisual = ({ project, className = '' }: { project: Project; className?: string }) => {
+    if (project.images.length === 0) {
+      return (
+        <div className={`relative overflow-hidden rounded-xl ${className}`}>
+          <div className={`w-full h-full bg-gradient-to-br ${project.gradient} flex items-center justify-center transition-transform duration-500 group-hover:scale-105`}>
+            <project.icon className="w-20 h-20 text-white/30" strokeWidth={1.5} />
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent pointer-events-none" />
         </div>
-      )}
-      <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent pointer-events-none" />
-    </div>
-  );
+      );
+    }
+
+    if (project.images.length === 1) {
+      return (
+        <div className={`relative overflow-hidden rounded-xl ${className}`}>
+          <img
+            src={project.images[0]}
+            alt={project.title}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent pointer-events-none" />
+        </div>
+      );
+    }
+
+    return (
+      <div className={`relative overflow-hidden rounded-xl ${className}`}>
+        <Carousel
+          className="w-full h-full"
+          opts={{ loop: true }}
+        >
+          <CarouselContent className="h-full -ml-0">
+            {project.images.map((src, idx) => (
+              <CarouselItem key={src} className="pl-0 h-full">
+                <img
+                  src={src}
+                  alt={`${project.title} — screenshot ${idx + 1} of ${project.images.length}`}
+                  className="w-full h-full object-cover"
+                  loading={idx === 0 ? 'eager' : 'lazy'}
+                />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious
+            className="left-3 top-1/2 -translate-y-1/2 bg-background/70 hover:bg-background border-primary/40 text-foreground backdrop-blur-sm"
+          />
+          <CarouselNext
+            className="right-3 top-1/2 -translate-y-1/2 bg-background/70 hover:bg-background border-primary/40 text-foreground backdrop-blur-sm"
+          />
+        </Carousel>
+        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-background/60 via-transparent to-transparent pointer-events-none" />
+      </div>
+    );
+  };
 
   const ProjectActions = ({ project }: { project: Project }) => (
     <div className="flex space-x-3">

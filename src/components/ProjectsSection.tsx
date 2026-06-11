@@ -96,7 +96,7 @@ const ProjectsSection = () => {
       gradient: "from-purple-600 to-pink-600",
       github: "https://github.com/Mathows/vieira-solutions",
       demo: "https://solutionsvieira.com.br/",
-      images: [],
+      images: ["/images/projects/vieira-hero.jpg"],
       featured: false,
     }
   ];

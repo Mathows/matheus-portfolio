@@ -1,6 +1,5 @@
-import { motion } from 'framer-motion';
 import { useLanguage } from '@/i18n/LanguageContext';
-import PageShell from '@/components/PageShell';
+import Section from './Section';
 
 const stack = [
   { name: 'C#', icon: 'devicon-csharp-plain' },
@@ -14,20 +13,15 @@ const stack = [
   { name: 'Git', icon: 'devicon-git-plain' },
 ];
 
-const Experience = () => {
+const ExperienceSection = () => {
   const { t } = useLanguage();
   const exp = t.experience;
 
   return (
-    <PageShell title={exp.title}>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-        className="border-l border-gold/50 pl-6"
-      >
+    <Section id="experiencia" title={exp.title}>
+      <div className="border-l border-gold/50 pl-6">
         <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h2 className="text-2xl font-light text-foreground">{exp.company}</h2>
+          <h3 className="text-2xl font-light text-foreground">{exp.company}</h3>
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-gold-light">
             {exp.period}
           </span>
@@ -40,9 +34,9 @@ const Experience = () => {
           {exp.summary}
         </p>
 
-        <h3 className="mt-10 font-mono text-xs uppercase tracking-[0.25em] text-foreground-muted">
+        <h4 className="mt-10 font-mono text-xs uppercase tracking-[0.25em] text-foreground-muted">
           {exp.responsibilitiesTitle}
-        </h3>
+        </h4>
         <ul className="mt-4 space-y-3">
           {exp.responsibilities.map((item) => (
             <li key={item} className="flex items-start gap-3 text-[15px] text-foreground-muted">
@@ -51,19 +45,14 @@ const Experience = () => {
             </li>
           ))}
         </ul>
-      </motion.div>
+      </div>
 
       {/* Stack */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-        className="mt-14"
-      >
-        <h3 className="mb-5 font-mono text-xs uppercase tracking-[0.25em] text-foreground-muted">
+      <div className="mt-14">
+        <h4 className="mb-6 font-mono text-xs uppercase tracking-[0.25em] text-foreground-muted">
           {exp.stackTitle}
-        </h3>
-        <div className="flex flex-wrap items-center gap-6">
+        </h4>
+        <div className="flex flex-wrap items-start gap-7">
           {stack.map((skill) => (
             <div key={skill.name} className="group flex flex-col items-center gap-2" title={skill.name}>
               <i
@@ -75,9 +64,9 @@ const Experience = () => {
             </div>
           ))}
         </div>
-      </motion.div>
-    </PageShell>
+      </div>
+    </Section>
   );
 };
 
-export default Experience;
+export default ExperienceSection;

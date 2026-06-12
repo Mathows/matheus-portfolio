@@ -4,6 +4,13 @@ export const translations = {
   en: {
     langSwitchTo: 'PT',
     nav: { back: 'Back to home' },
+    links: {
+      about: 'About',
+      experience: 'Experience',
+      projects: 'Projects',
+      courses: 'Courses',
+      contact: 'Contact',
+    },
     home: {
       greeting: 'Welcome.',
       role: 'Full Stack Developer',
@@ -14,18 +21,16 @@ export const translations = {
       projectsTitle: 'Projects',
       exploreTitle: 'Explore',
       stackTitle: 'Stack',
+      scroll: 'Scroll',
     },
-    projects: {
-      dima: {
-        name: 'Dima — Personal Finance',
-        desc: 'Full stack personal finance app: categories, income & expense tracking, dashboard with charts and a premium plan with Stripe payments.',
-      },
-      vieira: {
-        name: 'Vieira Solutions',
-        desc: 'Institutional site & landing page for a digital agency, with a contact form that stores leads, fires automatic notification and auto-reply e-mails, and redirects to WhatsApp.',
-      },
+    about: {
+      title: 'About',
+      heading: 'Full Stack Developer',
+      body1:
+        'I build modern, performant applications end to end — from SQL Server data modeling and .NET back-ends to React and Blazor front-ends.',
+      body2:
+        'I care about clean architecture, maintainable code and shipping software that actually solves problems.',
     },
-    links: { experience: 'Experience', courses: 'Courses & Certificates' },
     experience: {
       title: 'Experience',
       role: 'Full Stack Developer',
@@ -42,6 +47,22 @@ export const translations = {
         'Developing advanced reports with DevExpress',
       ],
       stackTitle: 'Main technologies',
+    },
+    projects: {
+      title: 'Projects',
+      subtitle: 'A selection of things I have built.',
+      statusDone: 'Completed',
+      code: 'Code',
+      dima: {
+        name: 'Dima — Personal Finance',
+        category: 'Finance',
+        desc: 'Full stack personal finance app: categories, income & expense tracking, dashboard with charts and a premium plan with Stripe payments.',
+      },
+      vieira: {
+        name: 'Vieira Solutions',
+        category: 'Web',
+        desc: 'Institutional site & landing page for a digital agency, with a contact form that stores leads, fires automatic notification and auto-reply e-mails, and redirects to WhatsApp.',
+      },
     },
     courses: {
       title: 'Courses & Certificates',
@@ -74,12 +95,42 @@ export const translations = {
         },
       },
     },
+    contact: {
+      title: "Let's talk",
+      subtitle: "I'm always open to new opportunities and interesting challenges.",
+      infoHeading: 'Get in touch',
+      emailLabel: 'Email',
+      locationLabel: 'Location',
+      locationValue: 'Brazil — Remote',
+      availabilityLabel: 'Availability',
+      availabilityValue: 'Mon–Fri, 9am–6pm',
+      socialHeading: 'Social',
+      formHeading: 'Send a message',
+      nameLabel: 'Name',
+      namePlaceholder: 'Your full name',
+      emailPlaceholder: 'you@email.com',
+      messageLabel: 'Message',
+      messagePlaceholder: 'Tell me about your project or idea...',
+      submit: 'Send message',
+      sending: 'Sending...',
+      toastTitle: 'Redirecting...',
+      toastDesc: 'Opening WhatsApp to send your message.',
+      messageIntro: 'Hi! My name is',
+      messageBody: 'Message',
+    },
     footer: { rights: 'All rights reserved.' },
   },
 
   pt: {
     langSwitchTo: 'EN',
     nav: { back: 'Voltar ao início' },
+    links: {
+      about: 'Sobre',
+      experience: 'Experiência',
+      projects: 'Projetos',
+      courses: 'Cursos',
+      contact: 'Contato',
+    },
     home: {
       greeting: 'Olá.',
       role: 'Desenvolvedor Full Stack',
@@ -90,18 +141,16 @@ export const translations = {
       projectsTitle: 'Projetos',
       exploreTitle: 'Explore',
       stackTitle: 'Stack',
+      scroll: 'Role',
     },
-    projects: {
-      dima: {
-        name: 'Dima — Controle Financeiro',
-        desc: 'Aplicação full stack de gestão financeira pessoal: categorias, lançamentos de receitas e despesas, dashboard com gráficos e plano premium com pagamentos via Stripe.',
-      },
-      vieira: {
-        name: 'Vieira Solutions',
-        desc: 'Site institucional e landing page para uma agência digital, com formulário que registra leads, dispara e-mails automáticos de notificação e auto-resposta, e redireciona para o WhatsApp.',
-      },
+    about: {
+      title: 'Sobre',
+      heading: 'Desenvolvedor Full Stack',
+      body1:
+        'Construo aplicações modernas e performáticas de ponta a ponta — da modelagem de dados em SQL Server e back-ends em .NET aos front-ends em React e Blazor.',
+      body2:
+        'Me importo com arquitetura limpa, código de fácil manutenção e entregar software que realmente resolve problemas.',
     },
-    links: { experience: 'Experiência', courses: 'Cursos & Certificados' },
     experience: {
       title: 'Experiência',
       role: 'Desenvolvedor Full Stack',
@@ -118,6 +167,22 @@ export const translations = {
         'Desenvolvimento de relatórios com DevExpress',
       ],
       stackTitle: 'Principais tecnologias',
+    },
+    projects: {
+      title: 'Projetos',
+      subtitle: 'Uma seleção do que construí.',
+      statusDone: 'Concluído',
+      code: 'Código',
+      dima: {
+        name: 'Dima — Controle Financeiro',
+        category: 'Finanças',
+        desc: 'Aplicação full stack de gestão financeira pessoal: categorias, lançamentos de receitas e despesas, dashboard com gráficos e plano premium com pagamentos via Stripe.',
+      },
+      vieira: {
+        name: 'Vieira Solutions',
+        category: 'Web',
+        desc: 'Site institucional e landing page para uma agência digital, com formulário que registra leads, dispara e-mails automáticos de notificação e auto-resposta, e redireciona para o WhatsApp.',
+      },
     },
     courses: {
       title: 'Cursos & Certificados',
@@ -149,6 +214,29 @@ export const translations = {
           desc: 'Técnicas com foco em performance para acesso a dados usando Dapper junto ao SQL Server.',
         },
       },
+    },
+    contact: {
+      title: 'Vamos conversar',
+      subtitle: 'Estou sempre aberto a novas oportunidades e desafios interessantes.',
+      infoHeading: 'Entre em contato',
+      emailLabel: 'Email',
+      locationLabel: 'Localização',
+      locationValue: 'Brasil — Remoto',
+      availabilityLabel: 'Disponibilidade',
+      availabilityValue: 'Seg–Sex, 9h–18h',
+      socialHeading: 'Redes',
+      formHeading: 'Envie uma mensagem',
+      nameLabel: 'Nome',
+      namePlaceholder: 'Seu nome completo',
+      emailPlaceholder: 'voce@email.com',
+      messageLabel: 'Mensagem',
+      messagePlaceholder: 'Conte-me sobre seu projeto ou ideia...',
+      submit: 'Enviar mensagem',
+      sending: 'Enviando...',
+      toastTitle: 'Redirecionando...',
+      toastDesc: 'Abrindo o WhatsApp para enviar sua mensagem.',
+      messageIntro: 'Olá! Meu nome é',
+      messageBody: 'Mensagem',
     },
     footer: { rights: 'Todos os direitos reservados.' },
   },

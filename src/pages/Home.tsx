@@ -1,9 +1,13 @@
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, ChevronDown } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import CornerBrackets from '@/components/CornerBrackets';
 import SiteHeader from '@/components/SiteHeader';
+import AboutSection from '@/components/sections/AboutSection';
+import ExperienceSection from '@/components/sections/ExperienceSection';
+import ProjectsSection from '@/components/sections/ProjectsSection';
+import CoursesSection from '@/components/sections/CoursesSection';
+import ContactSection from '@/components/sections/ContactSection';
 import matheusProfile from '/images/Gemini_Foto3.png';
 
 const skills = [
@@ -36,16 +40,18 @@ const Home = () => {
   ];
 
   const explore = [
-    { label: t.links.experience, to: '/experience' },
-    { label: t.links.courses, to: '/courses' },
+    { label: t.links.experience, href: '#experiencia' },
+    { label: t.links.courses, href: '#cursos' },
+    { label: t.links.contact, href: '#contato' },
   ];
 
   return (
-    <div className="relative flex min-h-screen flex-col bg-background-panel">
+    <div className="relative bg-background-panel">
       <CornerBrackets />
       <SiteHeader />
 
-      <main className="relative z-10 flex flex-1 items-center px-8 py-16 sm:px-16 lg:py-20">
+      {/* Hero — first screen */}
+      <section className="relative z-10 flex min-h-[calc(100vh-5.5rem)] items-center px-8 py-16 sm:px-16">
         <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-16 lg:grid-cols-[1.4fr_1fr] lg:gap-24">
           {/* Left column — intro */}
           <div>
@@ -57,7 +63,6 @@ const Home = () => {
                   className="h-28 w-28 object-cover object-center grayscale-[0.15] sm:h-32 sm:w-32"
                   style={{ objectPosition: 'center 35%' }}
                 />
-                {/* gold corner accents on the photo */}
                 <span className="absolute -left-1.5 -top-1.5 h-5 w-[2px] bg-metallic" />
                 <span className="absolute -left-1.5 -top-1.5 h-[2px] w-5 bg-metallic" />
                 <span className="absolute -bottom-1.5 -right-1.5 h-5 w-[2px] bg-metallic" />
@@ -97,13 +102,7 @@ const Home = () => {
             </motion.div>
 
             {/* Stack */}
-            <motion.div
-              custom={4}
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              className="mt-10"
-            >
+            <motion.div custom={4} variants={fadeUp} initial="hidden" animate="visible" className="mt-10">
               <p className="mb-4 font-mono text-xs uppercase tracking-[0.25em] text-foreground-muted">
                 {t.home.stackTitle}
               </p>
@@ -140,12 +139,7 @@ const Home = () => {
             >
               {projects.map((project) => (
                 <li key={project.name}>
-                  <a
-                    href={project.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group block"
-                  >
+                  <a href={project.href} target="_blank" rel="noopener noreferrer" className="group block">
                     <span className="link-underline flex items-center gap-1.5 text-[15px] text-foreground transition-colors duration-300 group-hover:text-gold-light">
                       {project.name}
                       <ArrowUpRight
@@ -179,8 +173,8 @@ const Home = () => {
               className="mt-6 space-y-4 border-l border-gold/50 pl-6"
             >
               {explore.map((item) => (
-                <li key={item.to}>
-                  <Link to={item.to} className="group block">
+                <li key={item.href}>
+                  <a href={item.href} className="group block">
                     <span className="link-underline flex items-center gap-1.5 text-[15px] text-foreground transition-colors duration-300 group-hover:text-gold-light">
                       {item.label}
                       <ArrowUpRight
@@ -188,17 +182,42 @@ const Home = () => {
                         strokeWidth={1.5}
                       />
                     </span>
-                  </Link>
+                  </a>
                 </li>
               ))}
             </motion.ul>
           </div>
         </div>
-      </main>
 
-      <footer className="relative z-10 flex justify-end px-8 pb-10 sm:px-16 sm:pb-12">
+        {/* Scroll cue */}
+        <motion.a
+          href="#sobre"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.4, duration: 0.8 }}
+          className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-foreground-muted transition-colors duration-300 hover:text-gold-light"
+          aria-label={t.home.scroll}
+        >
+          <span className="font-mono text-[10px] uppercase tracking-[0.3em]">{t.home.scroll}</span>
+          <motion.span animate={{ y: [0, 6, 0] }} transition={{ duration: 2, repeat: Infinity }}>
+            <ChevronDown className="h-4 w-4" strokeWidth={1.5} />
+          </motion.span>
+        </motion.a>
+      </section>
+
+      {/* Scrolling sections (old model order) */}
+      <AboutSection />
+      <ExperienceSection />
+      <ProjectsSection />
+      <CoursesSection />
+      <ContactSection />
+
+      <footer className="relative z-10 flex flex-col items-center gap-1 border-t border-border/40 px-8 py-10 sm:flex-row sm:justify-between sm:px-16">
         <p className="font-mono text-xs tracking-wider text-foreground-muted/70">
           © 2026 matheusalexandre.dev
+        </p>
+        <p className="font-mono text-xs tracking-wider text-foreground-muted/50">
+          Matheus Alexandre · {t.footer.rights}
         </p>
       </footer>
     </div>

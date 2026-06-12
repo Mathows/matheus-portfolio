@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Github, Linkedin } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
@@ -14,9 +15,23 @@ const socials = [
 
 const SiteHeader = () => {
   const { lang, toggleLang, t } = useLanguage();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
-    <header className="relative z-20 flex items-center justify-between px-8 pt-10 sm:px-16 sm:pt-12">
+    <header
+      className={`sticky top-0 z-30 flex items-center justify-between px-8 transition-all duration-300 sm:px-16 ${
+        scrolled
+          ? 'border-b border-border/50 bg-background-panel/85 py-4 backdrop-blur-md'
+          : 'border-b border-transparent pt-10 sm:pt-12'
+      }`}
+    >
       {/* Logo / monogram */}
       <Link to="/" className="group flex items-center gap-3" aria-label="Home">
         <div className="flex h-11 w-11 items-center justify-center border border-border-light/60 transition-colors duration-300 group-hover:border-gold/60">

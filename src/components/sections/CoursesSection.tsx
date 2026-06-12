@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
-import PageShell from '@/components/PageShell';
+import Section from './Section';
 
 const courseMeta = [
   { id: 1, date: '2024', topics: ['C#', 'Blazor', 'WebAssembly'], link: 'https://balta.io/certificados/9765ce52-74fd-4540-a4f1-c8c61c5cf3aa' },
@@ -12,11 +12,11 @@ const courseMeta = [
   { id: 6, date: '2023', topics: ['C#', 'Dapper', 'SQL Server'], link: 'https://balta.io/certificados/e40e6e2f-92ff-4a7f-ad28-3272d3e50de4' },
 ] as const;
 
-const Courses = () => {
+const CoursesSection = () => {
   const { t } = useLanguage();
 
   return (
-    <PageShell title={t.courses.title} subtitle={t.courses.subtitle}>
+    <Section id="cursos" title={t.courses.title} subtitle={t.courses.subtitle}>
       <ul className="space-y-px">
         {courseMeta.map((course, index) => {
           const text = t.courses.items[course.id];
@@ -24,8 +24,9 @@ const Courses = () => {
             <motion.li
               key={course.id}
               initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.08 * index, ease: [0.22, 1, 0.36, 1] }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 0.5, delay: 0.06 * index, ease: [0.22, 1, 0.36, 1] }}
             >
               <a
                 href={course.link}
@@ -34,13 +35,13 @@ const Courses = () => {
                 className="group flex flex-col gap-3 border-t border-border/60 py-6 transition-colors duration-300 hover:border-gold/40 sm:flex-row sm:items-start sm:justify-between sm:gap-8"
               >
                 <div className="max-w-xl">
-                  <h2 className="flex items-center gap-1.5 text-[17px] font-light text-foreground transition-colors duration-300 group-hover:text-gold-light">
+                  <h3 className="flex items-center gap-1.5 text-[17px] font-light text-foreground transition-colors duration-300 group-hover:text-gold-light">
                     {text.title}
                     <ArrowUpRight
                       className="h-4 w-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                       strokeWidth={1.5}
                     />
-                  </h2>
+                  </h3>
                   <p className="mt-2 text-[14px] leading-relaxed text-foreground-muted">
                     {text.desc}
                   </p>
@@ -63,8 +64,8 @@ const Courses = () => {
           );
         })}
       </ul>
-    </PageShell>
+    </Section>
   );
 };
 
-export default Courses;
+export default CoursesSection;

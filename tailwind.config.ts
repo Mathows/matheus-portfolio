@@ -15,14 +15,24 @@ export default {
     extend: {
       fontFamily: {
         inter: ['Inter', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
       },
       colors: {
-        border: "hsl(var(--border))",
+        border: {
+          DEFAULT: "hsl(var(--border))",
+          light: "hsl(var(--border-light))",
+        },
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
+        gold: {
+          DEFAULT: "hsl(var(--gold))",
+          light: "hsl(var(--gold-light))",
+          dark: "hsl(var(--gold-dark))",
+        },
+        silver: "hsl(var(--silver))",
         background: {
           DEFAULT: "hsl(var(--background))",
-          secondary: "hsl(var(--background-secondary))",
+          panel: "hsl(var(--background-panel))",
         },
         foreground: {
           DEFAULT: "hsl(var(--foreground))",
@@ -53,16 +63,13 @@ export default {
         warning: "hsl(var(--warning))",
       },
       backgroundImage: {
-        'gradient-primary': 'var(--gradient-primary)',
-        'gradient-hero': 'var(--gradient-hero)',
-        'gradient-accent': 'var(--gradient-accent)',
-        'gradient-card': 'var(--gradient-card)',
+        'gradient-metallic': 'var(--gradient-metallic)',
+        'gradient-gold': 'var(--gradient-gold)',
+        'gradient-panel': 'var(--gradient-panel)',
       },
       boxShadow: {
-        'card': 'var(--shadow-card)',
-        'card-hover': 'var(--shadow-card-hover)',
-        'glow': 'var(--shadow-glow)',
-        'accent': 'var(--shadow-accent)',
+        'soft': 'var(--shadow-soft)',
+        'gold': 'var(--shadow-gold)',
       },
       transitionTimingFunction: {
         'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',

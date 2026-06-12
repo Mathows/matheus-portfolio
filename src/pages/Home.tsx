@@ -60,13 +60,9 @@ const Home = () => {
                 <img
                   src={matheusProfile}
                   alt="Matheus Alexandre"
-                  className="h-28 w-28 object-cover object-center grayscale-[0.15] sm:h-32 sm:w-32"
+                  className="h-28 w-28 rounded-full border border-gold/30 object-cover object-center grayscale-[0.15] sm:h-32 sm:w-32"
                   style={{ objectPosition: 'center 35%' }}
                 />
-                <span className="absolute -left-1.5 -top-1.5 h-5 w-[2px] bg-metallic" />
-                <span className="absolute -left-1.5 -top-1.5 h-[2px] w-5 bg-metallic" />
-                <span className="absolute -bottom-1.5 -right-1.5 h-5 w-[2px] bg-metallic" />
-                <span className="absolute -bottom-1.5 -right-1.5 h-[2px] w-5 bg-metallic" />
               </div>
             </motion.div>
 

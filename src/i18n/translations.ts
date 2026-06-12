@@ -53,6 +53,7 @@ export const translations = {
       subtitle: 'A selection of things I have built.',
       statusDone: 'Completed',
       code: 'Code',
+      access: 'Visit',
       dima: {
         name: 'Dima — Personal Finance',
         category: 'Finance',
@@ -173,6 +174,7 @@ export const translations = {
       subtitle: 'Uma seleção do que construí.',
       statusDone: 'Concluído',
       code: 'Código',
+      access: 'Acessar',
       dima: {
         name: 'Dima — Controle Financeiro',
         category: 'Finanças',

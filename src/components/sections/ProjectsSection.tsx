@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Github } from 'lucide-react';
+import { Github, ExternalLink } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import Section from './Section';
 
@@ -11,11 +11,13 @@ const ProjectsSection = () => {
       ...t.projects.dima,
       tech: ['.NET 8', 'Blazor WASM', 'MudBlazor', 'EF Core', 'SQL Server', 'Stripe'],
       github: 'https://github.com/Mathows/dima-controle-financeiro',
+      live: '',
     },
     {
       ...t.projects.vieira,
       tech: ['.NET 10', 'Blazor WASM', 'MudBlazor', 'EF Core', 'SQL Server', 'MailKit'],
-      github: 'https://github.com/Mathows/vieira-solutions',
+      github: '',
+      live: 'https://solutionsvieira.com.br/',
     },
   ];
 
@@ -60,15 +62,27 @@ const ProjectsSection = () => {
               ))}
             </div>
 
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="link-underline mt-6 inline-flex items-center gap-2 text-sm text-foreground transition-colors duration-300 hover:text-gold-light"
-            >
-              <Github className="h-4 w-4" strokeWidth={1.5} />
-              {t.projects.code}
-            </a>
+            {project.live ? (
+              <a
+                href={project.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-underline mt-6 inline-flex items-center gap-2 text-sm text-foreground transition-colors duration-300 hover:text-gold-light"
+              >
+                <ExternalLink className="h-4 w-4" strokeWidth={1.5} />
+                {t.projects.access}
+              </a>
+            ) : (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-underline mt-6 inline-flex items-center gap-2 text-sm text-foreground transition-colors duration-300 hover:text-gold-light"
+              >
+                <Github className="h-4 w-4" strokeWidth={1.5} />
+                {t.projects.code}
+              </a>
+            )}
           </motion.div>
         ))}
       </div>

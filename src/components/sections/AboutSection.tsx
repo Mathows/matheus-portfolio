@@ -13,13 +13,9 @@ const AboutSection = () => {
           <img
             src={matheusProfile}
             alt="Matheus Alexandre"
-            className="h-64 w-64 object-cover object-center grayscale-[0.15] sm:h-72 sm:w-72"
+            className="h-64 w-64 rounded-full border border-gold/30 object-cover object-center grayscale-[0.15] sm:h-72 sm:w-72"
             style={{ objectPosition: 'center 35%' }}
           />
-          <span className="absolute -left-2 -top-2 h-8 w-[2px] bg-metallic" />
-          <span className="absolute -left-2 -top-2 h-[2px] w-8 bg-metallic" />
-          <span className="absolute -bottom-2 -right-2 h-8 w-[2px] bg-metallic" />
-          <span className="absolute -bottom-2 -right-2 h-[2px] w-8 bg-metallic" />
         </div>
 
         {/* Text */}

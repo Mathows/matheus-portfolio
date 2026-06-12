@@ -43,7 +43,7 @@ const ContactSection = () => {
 
   return (
     <Section id="contato" title={c.title} subtitle={c.subtitle}>
-      <form onSubmit={handleSubmit} className="mx-auto max-w-xl space-y-7">
+      <form onSubmit={handleSubmit} className="max-w-xl space-y-7">
         <div>
           <label htmlFor="name" className="font-mono text-[11px] uppercase tracking-wider text-foreground-muted">
             {c.nameLabel}

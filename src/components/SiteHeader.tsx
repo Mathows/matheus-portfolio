@@ -8,7 +8,7 @@ const socials = [
   { icon: Github, href: 'https://github.com/Mathows', label: 'GitHub' },
   {
     icon: Linkedin,
-    href: 'https://www.linkedin.com/in/matheus-alexandre-marques',
+    href: 'https://www.linkedin.com/in/matheus-alexandre-marques/',
     label: 'LinkedIn',
   },
 ];

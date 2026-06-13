@@ -9,7 +9,7 @@ const ContactSection = () => {
   const { toast } = useToast();
   const c = t.contact;
 
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (
@@ -30,7 +30,7 @@ const ContactSection = () => {
       });
       if (!res.ok) throw new Error('Request failed');
       toast({ title: c.toastTitle, description: c.toastDesc });
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({ name: '', email: '', phone: '', message: '' });
     } catch {
       toast({ title: c.toastErrorTitle, description: c.toastErrorDesc, variant: 'destructive' });
     } finally {
@@ -72,6 +72,22 @@ const ContactSection = () => {
             value={formData.email}
             onChange={handleChange}
             placeholder={c.emailPlaceholder}
+            className={inputClass}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="phone" className="font-mono text-[11px] uppercase tracking-wider text-foreground-muted">
+            {c.phoneLabel}
+          </label>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            required
+            value={formData.phone}
+            onChange={handleChange}
+            placeholder={c.phonePlaceholder}
             className={inputClass}
           />
         </div>

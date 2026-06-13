@@ -1,0 +1,9 @@
+# Copy this file to ".dev.vars" and fill in the real values to test the
+# contact form locally with `wrangler pages dev` (which runs the Pages Function).
+# ".dev.vars" is gitignored — never commit your real secrets.
+#
+# These are the same variables already configured in the Cloudflare Pages
+# project settings, used in production.
+
+TELEGRAM_BOT_TOKEN=your-bot-token-from-botfather
+TELEGRAM_CHAT_ID=your-personal-chat-id

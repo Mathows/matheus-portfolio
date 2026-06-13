@@ -54,15 +54,28 @@ export const translations = {
       statusDone: 'Completed',
       code: 'Code',
       access: 'Visit',
+      highlightsLabel: 'Highlights',
       dima: {
         name: 'Dima — Personal Finance',
         category: 'Finance',
-        desc: 'Full stack personal finance app: categories, income & expense tracking, dashboard with charts and a premium plan with Stripe payments.',
+        desc: 'A full stack personal finance app to track income and expenses, visualize spending and unlock premium features.',
+        highlights: [
+          'Income & expense tracking organized by custom categories',
+          'Interactive dashboard with monthly charts (income vs. expenses, by category)',
+          'Premium plan with real Stripe payment integration',
+          'Full stack: Blazor WebAssembly SPA + .NET 8 API + EF Core + SQL Server',
+        ],
       },
       vieira: {
         name: 'Vieira Solutions',
         category: 'Web',
-        desc: 'Institutional site & landing page for a digital agency, with a contact form that stores leads, fires automatic notification and auto-reply e-mails, and redirects to WhatsApp.',
+        desc: 'Institutional site & landing page for a digital agency, live in production.',
+        highlights: [
+          'Contact form that stores leads in the database',
+          'Automated notification and auto-reply e-mails (MailKit)',
+          'Direct WhatsApp redirect for fast lead contact',
+          'Full stack: Blazor WebAssembly + .NET 10 API + EF Core + SQL Server',
+        ],
       },
     },
     courses: {
@@ -179,15 +192,28 @@ export const translations = {
       statusDone: 'Concluído',
       code: 'Código',
       access: 'Acessar',
+      highlightsLabel: 'Destaques',
       dima: {
         name: 'Dima — Controle Financeiro',
         category: 'Finanças',
-        desc: 'Aplicação full stack de gestão financeira pessoal: categorias, lançamentos de receitas e despesas, dashboard com gráficos e plano premium com pagamentos via Stripe.',
+        desc: 'Aplicação full stack de gestão financeira pessoal para controlar receitas e despesas, visualizar gastos e desbloquear recursos premium.',
+        highlights: [
+          'Controle de receitas e despesas organizado por categorias personalizadas',
+          'Dashboard interativo com gráficos mensais (receitas x despesas, por categoria)',
+          'Plano premium com integração real de pagamentos via Stripe',
+          'Full stack: SPA em Blazor WebAssembly + API .NET 8 + EF Core + SQL Server',
+        ],
       },
       vieira: {
         name: 'Vieira Solutions',
         category: 'Web',
-        desc: 'Site institucional e landing page para uma agência digital, com formulário que registra leads, dispara e-mails automáticos de notificação e auto-resposta, e redireciona para o WhatsApp.',
+        desc: 'Site institucional e landing page para uma agência digital, no ar em produção.',
+        highlights: [
+          'Formulário de contato que registra os leads no banco de dados',
+          'E-mails automáticos de notificação e auto-resposta (MailKit)',
+          'Redirecionamento direto para o WhatsApp para contato rápido',
+          'Full stack: Blazor WebAssembly + API .NET 10 + EF Core + SQL Server',
+        ],
       },
     },
     courses: {

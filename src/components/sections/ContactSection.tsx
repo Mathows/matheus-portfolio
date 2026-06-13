@@ -2,15 +2,22 @@ import { useState } from 'react';
 import { Send } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { useToast } from '@/hooks/use-toast';
+import CountryCombobox from '@/components/CountryCombobox';
+import { DEFAULT_COUNTRY, type Country } from '@/lib/countries';
 import Section from './Section';
 
-// Formata como celular BR: (XX) XXXXX-XXXX — aceita só dígitos, máx. 11
-function formatPhone(value: string): string {
-  const d = value.replace(/\D/g, '').slice(0, 11);
-  if (d.length <= 2) return d;
-  if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
-  if (d.length <= 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
-  return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+// Formats the local phone number. Brazil gets the friendly (XX) XXXXX-XXXX
+// mask; other countries just get digits (the dial code is shown separately).
+function formatPhone(value: string, iso: string): string {
+  const digits = value.replace(/\D/g, '');
+  if (iso === 'BR') {
+    const d = digits.slice(0, 11);
+    if (d.length <= 2) return d;
+    if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
+    if (d.length <= 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
+    return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+  }
+  return digits.slice(0, 15);
 }
 
 const ContactSection = () => {
@@ -18,6 +25,7 @@ const ContactSection = () => {
   const { toast } = useToast();
   const c = t.contact;
 
+  const [country, setCountry] = useState<Country>(DEFAULT_COUNTRY);
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -25,7 +33,16 @@ const ContactSection = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: name === 'phone' ? formatPhone(value) : value }));
+    setFormData((prev) => ({
+      ...prev,
+      [name]: name === 'phone' ? formatPhone(value, country.iso) : value,
+    }));
+  };
+
+  const handleCountryChange = (next: Country) => {
+    setCountry(next);
+    // re-mask the current number for the new country
+    setFormData((prev) => ({ ...prev, phone: formatPhone(prev.phone, next.iso) }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -35,7 +52,13 @@ const ContactSection = () => {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          country: country.name,
+          phone: `${country.dial} ${formData.phone}`.trim(),
+          message: formData.message,
+        }),
       });
       if (!res.ok) throw new Error('Request failed');
       toast({ title: c.toastTitle, description: c.toastDesc });
@@ -47,6 +70,7 @@ const ContactSection = () => {
     }
   };
 
+  const labelClass = 'font-mono text-[11px] uppercase tracking-wider text-foreground-muted';
   const inputClass =
     'w-full border-b border-border/70 bg-transparent py-2.5 text-[15px] text-foreground placeholder:text-foreground-muted/50 transition-colors duration-300 focus:border-gold/60 focus:outline-none';
 
@@ -54,9 +78,7 @@ const ContactSection = () => {
     <Section id="contato" title={c.title} subtitle={c.subtitle}>
       <form onSubmit={handleSubmit} className="max-w-xl space-y-7">
         <div>
-          <label htmlFor="name" className="font-mono text-[11px] uppercase tracking-wider text-foreground-muted">
-            {c.nameLabel}
-          </label>
+          <label htmlFor="name" className={labelClass}>{c.nameLabel}</label>
           <input
             id="name"
             name="name"
@@ -70,9 +92,7 @@ const ContactSection = () => {
         </div>
 
         <div>
-          <label htmlFor="email" className="font-mono text-[11px] uppercase tracking-wider text-foreground-muted">
-            {c.emailLabel}
-          </label>
+          <label htmlFor="email" className={labelClass}>{c.emailLabel}</label>
           <input
             id="email"
             name="email"
@@ -86,28 +106,36 @@ const ContactSection = () => {
         </div>
 
         <div>
-          <label htmlFor="phone" className="font-mono text-[11px] uppercase tracking-wider text-foreground-muted">
-            {c.phoneLabel}
-          </label>
-          <input
-            id="phone"
-            name="phone"
-            type="tel"
-            inputMode="numeric"
-            autoComplete="tel"
-            maxLength={15}
-            required
-            value={formData.phone}
-            onChange={handleChange}
-            placeholder={c.phonePlaceholder}
-            className={inputClass}
+          <span className={`mb-0.5 block ${labelClass}`}>{c.countryLabel}</span>
+          <CountryCombobox
+            value={country}
+            onChange={handleCountryChange}
+            searchPlaceholder={c.countrySearch}
           />
         </div>
 
         <div>
-          <label htmlFor="message" className="font-mono text-[11px] uppercase tracking-wider text-foreground-muted">
-            {c.messageLabel}
-          </label>
+          <label htmlFor="phone" className={labelClass}>{c.phoneLabel}</label>
+          <div className="flex items-center gap-2 border-b border-border/70 transition-colors duration-300 focus-within:border-gold/60">
+            <span className="select-none py-2.5 text-[15px] text-foreground-muted">{country.dial}</span>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              inputMode="tel"
+              autoComplete="tel"
+              maxLength={20}
+              required
+              value={formData.phone}
+              onChange={handleChange}
+              placeholder={c.phonePlaceholder}
+              className="w-full bg-transparent py-2.5 text-[15px] text-foreground placeholder:text-foreground-muted/50 focus:outline-none"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label htmlFor="message" className={labelClass}>{c.messageLabel}</label>
           <textarea
             id="message"
             name="message"

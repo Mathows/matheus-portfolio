@@ -4,6 +4,15 @@ import { useLanguage } from '@/i18n/LanguageContext';
 import { useToast } from '@/hooks/use-toast';
 import Section from './Section';
 
+// Formata como celular BR: (XX) XXXXX-XXXX — aceita só dígitos, máx. 11
+function formatPhone(value: string): string {
+  const d = value.replace(/\D/g, '').slice(0, 11);
+  if (d.length <= 2) return d;
+  if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
+  if (d.length <= 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
+  return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+}
+
 const ContactSection = () => {
   const { t } = useLanguage();
   const { toast } = useToast();
@@ -16,7 +25,7 @@ const ContactSection = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: name === 'phone' ? formatPhone(value) : value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -84,6 +93,9 @@ const ContactSection = () => {
             id="phone"
             name="phone"
             type="tel"
+            inputMode="numeric"
+            autoComplete="tel"
+            maxLength={15}
             required
             value={formData.phone}
             onChange={handleChange}

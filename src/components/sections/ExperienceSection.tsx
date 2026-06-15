@@ -1,11 +1,20 @@
+import { Smartphone, type LucideIcon } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import Section from './Section';
 
-const stack = [
+type Skill = {
+  name: string;
+  icon?: string;        // devicon class
+  LucideIcon?: LucideIcon; // lucide-react fallback for techs missing in devicon
+};
+
+const stack: Skill[] = [
   { name: 'C#', icon: 'devicon-csharp-plain' },
   { name: '.NET', icon: 'devicon-dotnetcore-plain' },
+  { name: '.NET MAUI', LucideIcon: Smartphone },
   { name: 'SQL Server', icon: 'devicon-microsoftsqlserver-plain' },
   { name: 'Blazor', icon: 'devicon-blazor-original' },
+  { name: 'Azure', icon: 'devicon-azure-plain' },
   { name: 'React', icon: 'devicon-react-original' },
   { name: 'TypeScript', icon: 'devicon-typescript-plain' },
   { name: 'Java', icon: 'devicon-java-plain' },
@@ -55,9 +64,16 @@ const ExperienceSection = () => {
         <div className="flex flex-wrap items-start gap-7">
           {stack.map((skill) => (
             <div key={skill.name} className="group flex flex-col items-center gap-2" title={skill.name}>
-              <i
-                className={`${skill.icon} text-3xl text-foreground-muted transition-colors duration-300 group-hover:text-gold-light`}
-              />
+              {skill.LucideIcon ? (
+                <skill.LucideIcon
+                  className="h-8 w-8 text-foreground-muted transition-colors duration-300 group-hover:text-gold-light"
+                  strokeWidth={1.5}
+                />
+              ) : (
+                <i
+                  className={`${skill.icon} text-3xl text-foreground-muted transition-colors duration-300 group-hover:text-gold-light`}
+                />
+              )}
               <span className="font-mono text-[10px] uppercase tracking-wider text-foreground-muted/70">
                 {skill.name}
               </span>

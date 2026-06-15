@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowUpRight, ChevronDown } from 'lucide-react';
+import { ArrowUpRight, ChevronDown, Smartphone, type LucideIcon } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import CornerBrackets from '@/components/CornerBrackets';
 import SiteHeader from '@/components/SiteHeader';
@@ -10,11 +10,19 @@ import CoursesSection from '@/components/sections/CoursesSection';
 import ContactSection from '@/components/sections/ContactSection';
 import matheusProfile from '/images/Gemini_Foto3.png';
 
-const skills = [
+type Skill = {
+  name: string;
+  icon?: string;        // devicon class
+  LucideIcon?: LucideIcon; // lucide-react fallback for techs missing in devicon
+};
+
+const skills: Skill[] = [
   { name: 'C#', icon: 'devicon-csharp-plain' },
   { name: '.NET', icon: 'devicon-dotnetcore-plain' },
+  { name: '.NET MAUI', LucideIcon: Smartphone },
   { name: 'SQL Server', icon: 'devicon-microsoftsqlserver-plain' },
   { name: 'Blazor', icon: 'devicon-blazor-original' },
+  { name: 'Azure', icon: 'devicon-azure-plain' },
   { name: 'React', icon: 'devicon-react-original' },
   { name: 'TypeScript', icon: 'devicon-typescript-plain' },
   { name: 'Java', icon: 'devicon-java-plain' },
@@ -105,9 +113,16 @@ const Home = () => {
               <div className="flex flex-wrap items-center gap-5">
                 {skills.map((skill) => (
                   <div key={skill.name} className="group flex items-center gap-2" title={skill.name}>
-                    <i
-                      className={`${skill.icon} text-2xl text-foreground-muted transition-colors duration-300 group-hover:text-gold-light`}
-                    />
+                    {skill.LucideIcon ? (
+                      <skill.LucideIcon
+                        className="h-[22px] w-[22px] text-foreground-muted transition-colors duration-300 group-hover:text-gold-light"
+                        strokeWidth={1.5}
+                      />
+                    ) : (
+                      <i
+                        className={`${skill.icon} text-2xl text-foreground-muted transition-colors duration-300 group-hover:text-gold-light`}
+                      />
+                    )}
                   </div>
                 ))}
               </div>

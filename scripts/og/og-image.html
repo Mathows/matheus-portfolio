@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>OG image source — Matheus Alexandre</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;500;700&family=JetBrains+Mono:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #1c1c1c;
+        --gold: hsl(42 55% 60%);
+        --gold-soft: hsl(42 48% 55%);
+        --text: #f0f0f0;
+        --text-dim: #c8c8c8;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        width: 1200px;
+        height: 630px;
+        background: var(--bg);
+        font-family: 'Inter', sans-serif;
+        color: var(--text);
+        overflow: hidden;
+      }
+
+      .canvas {
+        position: relative;
+        width: 1200px;
+        height: 630px;
+        background: var(--bg);
+        display: flex;
+        align-items: center;
+        padding-left: 110px;
+        padding-right: 80px;
+        gap: 64px;
+      }
+
+      /* Corner brackets */
+      .bracket {
+        position: absolute;
+        width: 64px;
+        height: 64px;
+      }
+      .bracket-tl {
+        top: 44px;
+        left: 44px;
+        border-top: 2px solid var(--gold);
+        border-left: 2px solid var(--gold);
+      }
+      .bracket-tr {
+        top: 44px;
+        right: 44px;
+        border-top: 2px solid var(--gold);
+        border-right: 2px solid var(--gold);
+      }
+      .bracket-bl {
+        bottom: 44px;
+        left: 44px;
+        border-bottom: 2px solid var(--gold);
+        border-left: 2px solid var(--gold);
+      }
+      .bracket-br {
+        bottom: 44px;
+        right: 44px;
+        border-bottom: 2px solid var(--gold);
+        border-right: 2px solid var(--gold);
+      }
+
+      .photo {
+        flex-shrink: 0;
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 1px solid hsl(42 30% 35%);
+      }
+
+      .content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      h1 {
+        font-family: 'Inter', sans-serif;
+        font-size: 76px;
+        font-weight: 300;
+        line-height: 1.0;
+        letter-spacing: -0.02em;
+        color: var(--text);
+      }
+
+      .role {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 17px;
+        font-weight: 400;
+        color: var(--gold);
+        letter-spacing: 0.42em;
+        text-transform: uppercase;
+        padding-top: 4px;
+      }
+
+      .stack {
+        font-family: 'Inter', sans-serif;
+        font-size: 23px;
+        font-weight: 300;
+        color: var(--text-dim);
+        letter-spacing: 0.01em;
+        padding-top: 4px;
+      }
+
+      .stack .sep {
+        color: var(--gold);
+        margin: 0 10px;
+        font-weight: 400;
+      }
+
+      .domain {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 23px;
+        font-weight: 500;
+        color: var(--gold);
+        padding-top: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="canvas">
+      <div class="bracket bracket-tl"></div>
+      <div class="bracket bracket-tr"></div>
+      <div class="bracket bracket-bl"></div>
+      <div class="bracket bracket-br"></div>
+
+      <img src="og-photo.png" class="photo" alt="Matheus Alexandre" />
+
+      <div class="content">
+        <h1>Matheus<br />Alexandre</h1>
+        <div class="role">Full Stack Developer</div>
+        <div class="stack">
+          C# <span class="sep">·</span> .NET <span class="sep">·</span> .NET MAUI
+          <span class="sep">·</span> SQL Server <span class="sep">·</span> Blazor
+          <span class="sep">·</span> Azure
+        </div>
+        <div class="domain">matheusalexandre.dev</div>
+      </div>
+    </div>
+  </body>
+</html>

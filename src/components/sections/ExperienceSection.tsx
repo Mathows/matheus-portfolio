@@ -1,30 +1,24 @@
-import { Smartphone, type LucideIcon } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import Section from './Section';
 
-type Skill = {
-  name: string;
-  icon?: string;        // devicon class
-  LucideIcon?: LucideIcon; // lucide-react fallback for techs missing in devicon
-};
-
-const stack: Skill[] = [
-  { name: 'C#', icon: 'devicon-csharp-plain' },
-  { name: '.NET', icon: 'devicon-dotnetcore-plain' },
-  { name: '.NET MAUI', LucideIcon: Smartphone },
-  { name: 'SQL Server', icon: 'devicon-microsoftsqlserver-plain' },
-  { name: 'Blazor', icon: 'devicon-blazor-original' },
-  { name: 'Azure', icon: 'devicon-azure-plain' },
-  { name: 'React', icon: 'devicon-react-original' },
-  { name: 'TypeScript', icon: 'devicon-typescript-plain' },
-  { name: 'Java', icon: 'devicon-java-plain' },
-  { name: 'Docker', icon: 'devicon-docker-plain' },
-  { name: 'Git', icon: 'devicon-git-plain' },
+// Day-to-day stack on the job (the broader personal stack lives in the hero)
+const stack = [
+  'C#',
+  '.NET Framework 4.8',
+  '.NET Web API',
+  'ASP.NET Web Forms',
+  'SQL Server',
+  'NHibernate',
+  'EF Core',
+  'DevExpress',
+  'Git',
 ];
 
 const ExperienceSection = () => {
   const { t } = useLanguage();
   const exp = t.experience;
+
+  const subheadingClass = 'font-mono text-xs uppercase tracking-[0.25em] text-foreground-muted';
 
   return (
     <Section id="experiencia" title={exp.title}>
@@ -39,45 +33,56 @@ const ExperienceSection = () => {
           {exp.role} · {exp.location}
         </p>
 
-        <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-foreground-muted">
+        <p className="mt-6 max-w-3xl text-[15px] leading-relaxed text-foreground-muted">
           {exp.summary}
         </p>
 
-        <h4 className="mt-10 font-mono text-xs uppercase tracking-[0.25em] text-foreground-muted">
-          {exp.responsibilitiesTitle}
-        </h4>
+        {/* Key numbers */}
+        <dl className="mt-10 grid max-w-3xl grid-cols-3 gap-6">
+          {exp.stats.map((stat) => (
+            <div key={stat.label}>
+              <dt className="text-metallic text-3xl font-extralight tracking-tight sm:text-4xl">
+                {stat.value}
+              </dt>
+              <dd className="mt-1 font-mono text-[10px] uppercase tracking-wider text-foreground-muted/80 sm:text-[11px]">
+                {stat.label}
+              </dd>
+            </div>
+          ))}
+        </dl>
+
+        <h4 className={`mt-12 ${subheadingClass}`}>{exp.highlightsTitle}</h4>
+        <ul className="mt-5 grid grid-cols-1 gap-x-10 gap-y-6 md:grid-cols-2">
+          {exp.highlights.map((item) => (
+            <li key={item.title} className="flex items-start gap-3">
+              <span className="mt-2.5 h-1 w-1 flex-shrink-0 bg-metallic" />
+              <div>
+                <p className="text-[15px] text-foreground">{item.title}</p>
+                <p className="mt-1 text-[14px] leading-relaxed text-foreground-muted">{item.desc}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        <h4 className={`mt-12 ${subheadingClass}`}>{exp.approachTitle}</h4>
         <ul className="mt-4 space-y-3">
-          {exp.responsibilities.map((item) => (
+          {exp.approach.map((item) => (
             <li key={item} className="flex items-start gap-3 text-[15px] text-foreground-muted">
               <span className="mt-2 h-1 w-1 flex-shrink-0 bg-metallic" />
               <span>{item}</span>
             </li>
           ))}
         </ul>
-      </div>
 
-      {/* Stack */}
-      <div className="mt-14">
-        <h4 className="mb-6 font-mono text-xs uppercase tracking-[0.25em] text-foreground-muted">
-          {exp.stackTitle}
-        </h4>
-        <div className="flex flex-wrap items-start gap-7">
-          {stack.map((skill) => (
-            <div key={skill.name} className="group flex flex-col items-center gap-2" title={skill.name}>
-              {skill.LucideIcon ? (
-                <skill.LucideIcon
-                  className="h-8 w-8 text-foreground-muted transition-colors duration-300 group-hover:text-gold-light"
-                  strokeWidth={1.5}
-                />
-              ) : (
-                <i
-                  className={`${skill.icon} text-3xl text-foreground-muted transition-colors duration-300 group-hover:text-gold-light`}
-                />
-              )}
-              <span className="font-mono text-[10px] uppercase tracking-wider text-foreground-muted/70">
-                {skill.name}
-              </span>
-            </div>
+        <h4 className={`mt-12 ${subheadingClass}`}>{exp.stackTitle}</h4>
+        <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2">
+          {stack.map((tech) => (
+            <span
+              key={tech}
+              className="font-mono text-[11px] uppercase tracking-wider text-foreground-muted/70"
+            >
+              {tech}
+            </span>
           ))}
         </div>
       </div>

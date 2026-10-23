@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Matheus Alexandre — Full Stack Developer (.NET / C#)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @page { size: A4; margin: 13mm 16mm; }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: 'Inter', Arial, sans-serif;
+        font-size: 9.4pt;
+        line-height: 1.45;
+        color: #1f2328;
+      }
+      a { color: inherit; text-decoration: none; }
+
+      header { padding-bottom: 10pt; border-bottom: 1.5pt solid #b08d57; }
+      h1 { font-size: 22pt; font-weight: 300; letter-spacing: -0.3pt; color: #111; }
+      .role { margin-top: 2pt; font-size: 10.5pt; font-weight: 500; color: #8a6a3b; }
+      .contact { margin-top: 6pt; font-size: 8.4pt; color: #4b5057; white-space: nowrap; }
+      .contact span + span::before { content: '·'; margin: 0 5pt; color: #b08d57; }
+
+      h2 {
+        margin: 13pt 0 6pt;
+        font-size: 8.6pt;
+        font-weight: 600;
+        letter-spacing: 0;
+        text-transform: uppercase;
+        color: #8a6a3b;
+      }
+      p { color: #2f343a; }
+
+      .item + .item { margin-top: 9pt; }
+      .item-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12pt; }
+      .item-title { font-size: 10.4pt; font-weight: 600; color: #111; }
+      .item-title .muted { font-weight: 400; color: #4b5057; }
+      .item-date { font-size: 8.8pt; color: #4b5057; white-space: nowrap; }
+      .item-sub { font-size: 8.8pt; color: #4b5057; }
+      ul { margin-top: 4pt; padding-left: 12pt; }
+      li { margin-top: 2pt; color: #2f343a; }
+      li::marker { color: #b08d57; }
+      .tech { margin-top: 3pt; font-size: 8.6pt; color: #4b5057; }
+      .tech b { font-weight: 500; color: #2f343a; }
+
+      .skills { display: grid; grid-template-columns: 92pt 1fr; row-gap: 3pt; }
+      .skills dt { font-weight: 500; color: #111; }
+      .skills dd { color: #2f343a; }
+
+      .certs { display: grid; grid-template-columns: 1fr 1fr; column-gap: 18pt; row-gap: 3pt; }
+      .certs div { display: flex; justify-content: space-between; gap: 8pt; }
+      .certs span:last-child { color: #4b5057; white-space: nowrap; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Matheus Alexandre</h1>
+      <div class="role">Full Stack Developer · .NET / C# · Brazil</div>
+      <div class="contact">
+        <span><a href="mailto:matheusalexmc@gmail.com">matheusalexmc@gmail.com</a></span>
+        <span><a href="https://matheusalexandre.dev">matheusalexandre.dev</a></span>
+        <span><a href="https://www.linkedin.com/in/matheus-alexandre-marques/">linkedin.com/in/matheus-alexandre-marques</a></span>
+        <span><a href="https://github.com/Mathows">github.com/Mathows</a></span>
+      </div>
+    </header>
+
+    <h2>Summary</h2>
+    <p>
+      .NET developer with 4+ years building and maintaining business-critical systems — ERP,
+      e-invoicing and receivables — with C#, .NET and SQL Server. Strong in SQL Server performance
+      tuning, production troubleshooting and data integrity, with an evidence-first approach:
+      measure before fixing, ship small reversible changes and validate before release.
+    </p>
+
+    <h2>Experience</h2>
+    <div class="item">
+      <div class="item-head">
+        <div class="item-title">Full Stack Developer <span class="muted">— Titaniumfix</span></div>
+        <div class="item-date">2022 — Present</div>
+      </div>
+      <div class="item-sub">Brazil · On-site</div>
+      <p style="margin-top: 4pt">
+        Develop and maintain the company's in-house ERP (orders, inventory, finance and billing) and
+        an integrated fiscal and financial platform for e-invoicing (NF&#8209;e), bank slips and receivables.
+      </p>
+      <ul>
+        <li><b>80× performance gain:</b> rewrote a cursor-based critical routine as set-based MERGE … OUTPUT, replacing hundreds of row-by-row statements with 2 batch operations (~87 s → 1.1 s).</li>
+        <li><b>Data integrity:</b> traced duplicate records to users retrying operations that had timed out but succeeded; prevented them with sp_getapplock and a UI lock.</li>
+        <li><b>Scalability:</b> rebuilt a listing screen that froze on large data volumes with database-side paging and sorting via typed stored procedures.</li>
+        <li><b>Integrations:</b> migrated bank slip issuance from a legacy COM component to a modern REST API.</li>
+        <li><b>Production debugging:</b> found a stale NHibernate session overwriting stored-procedure updates (fix validated with 7 test scenarios); made the data layer preserve original exceptions.</li>
+        <li><b>Regulatory:</b> delivered alphanumeric CNPJ (IN RFB 2.229/2024) across two systems and UDI-DI traceability; analyzed Brazil's Tax Reform rules for NF-e returns.</li>
+      </ul>
+      <div class="tech"><b>Stack:</b> C#, .NET Framework 4.8, .NET Web API, ASP.NET Web Forms, SQL Server, NHibernate, EF Core, DevExpress, Git</div>
+    </div>
+
+    <h2>Projects</h2>
+    <div class="item">
+      <div class="item-head">
+        <div class="item-title">Dima — Personal Finance <span class="muted">· github.com/Mathows/dima-controle-financeiro</span></div>
+      </div>
+      <ul>
+        <li>Income and expense tracking with a monthly-charts dashboard and a premium plan paid via Stripe.</li>
+      </ul>
+      <div class="tech"><b>Stack:</b> .NET 8 API, Blazor WebAssembly, MudBlazor, EF Core, SQL Server, Stripe</div>
+    </div>
+    <div class="item">
+      <div class="item-head">
+        <div class="item-title">Vieira Solutions <span class="muted">· solutionsvieira.com.br</span></div>
+      </div>
+      <ul>
+        <li>Agency website in production, with database-backed lead capture and automated e-mails.</li>
+      </ul>
+      <div class="tech"><b>Stack:</b> .NET 10 API, Blazor WebAssembly, MudBlazor, EF Core, SQL Server, MailKit</div>
+    </div>
+
+    <h2>Skills</h2>
+    <dl class="skills">
+      <dt>Back-end</dt><dd>C#, .NET, ASP.NET Core, Entity Framework Core, Dapper, REST APIs</dd>
+      <dt>Front-end</dt><dd>Blazor (WebAssembly &amp; Server), React, TypeScript, MudBlazor, DevExpress</dd>
+      <dt>Data</dt><dd>SQL Server (set-based T-SQL, procedures, triggers, indexing, locking, tuning), NHibernate</dd>
+      <dt>Cloud &amp; Tools</dt><dd>Azure, Docker, Git, .NET MAUI</dd>
+    </dl>
+
+    <h2>Education</h2>
+    <div class="item-head">
+      <div class="item-title">Technologist Degree in Systems Analysis and Development <span class="muted">— Universidade Paulista (UNIP)</span></div>
+      <div class="item-date">2024</div>
+    </div>
+
+    <h2>Certifications — balta.io</h2>
+    <p>
+      Blazor WebAssembly Fundamentals (2024) · ASP.NET 6 Fundamentals · Entity Framework Fundamentals ·
+      Data Access with .NET, Dapper &amp; SQL Server · .NET Developer Fundamentals · C# Fundamentals (2023)
+    </p>
+  </body>
+</html>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Github, Linkedin } from 'lucide-react';
+import { Mail, Github, Linkedin, FileDown } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 
 const socials = [
@@ -26,7 +26,7 @@ const SiteHeader = () => {
 
   return (
     <header
-      className={`sticky top-0 z-30 flex items-center justify-between px-8 transition-all duration-300 sm:px-16 ${
+      className={`sticky top-0 z-30 flex items-center justify-between px-6 transition-all duration-300 sm:px-16 ${
         scrolled
           ? 'border-b border-border/50 bg-background-panel/85 py-4 backdrop-blur-md'
           : 'border-b border-transparent pt-10 sm:pt-12'
@@ -39,8 +39,8 @@ const SiteHeader = () => {
         </div>
       </Link>
 
-      {/* Right side: language toggle + socials */}
-      <div className="flex items-center gap-6">
+      {/* Right side: language toggle + CV + socials */}
+      <div className="flex items-center gap-4 sm:gap-6">
         <button
           onClick={toggleLang}
           className="font-mono text-xs uppercase tracking-[0.2em] text-foreground-muted transition-colors duration-300 hover:text-gold-light"
@@ -51,7 +51,18 @@ const SiteHeader = () => {
           <span>{t.langSwitchTo}</span>
         </button>
 
-        <nav className="flex items-center gap-4">
+        <a
+          href="/cv/Matheus-Alexandre-CV.pdf"
+          download
+          aria-label={t.cvDownload}
+          title={t.cvDownload}
+          className="flex items-center gap-1.5 border border-gold/50 px-2.5 py-1.5 sm:px-3 font-mono text-xs uppercase tracking-[0.2em] text-gold-light transition-colors duration-300 hover:bg-gold/10"
+        >
+          <FileDown className="h-3.5 w-3.5" strokeWidth={1.5} />
+          CV
+        </a>
+
+        <nav className="flex items-center gap-3 sm:gap-4">
           {socials.map(({ icon: Icon, href, label }) => (
             <a
               key={label}

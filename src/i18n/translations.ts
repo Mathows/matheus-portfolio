@@ -1,21 +1,25 @@
 export type Lang = 'en' | 'pt';
 
+// Professional experience counted from 2022, so the intro never goes stale
+const yearsOfExperience = new Date().getFullYear() - 2022;
+
 export const translations = {
   en: {
     langSwitchTo: 'PT',
+    cvDownload: 'Download CV',
     nav: { back: 'Back to home' },
     links: {
       about: 'About',
       experience: 'Experience',
       projects: 'Projects',
-      courses: 'Courses',
+      courses: 'Education',
       contact: 'Contact',
     },
     home: {
       greeting: 'Welcome.',
       role: 'Full Stack Developer',
       intro1:
-        "My name is Matheus Alexandre, a full stack developer based in Brazil. For the past 2 years I've built modern, high-performance applications with C#, .NET, SQL Server, React and Blazor.",
+        `My name is Matheus Alexandre, a full stack developer based in Brazil. For the past ${yearsOfExperience} years I've built modern, high-performance applications with C#, .NET, SQL Server, React and Blazor.`,
       intro2:
         "I'm passionate about clean architecture, performant systems and well-crafted, intuitive user experiences.",
       projectsTitle: 'Projects',
@@ -38,15 +42,50 @@ export const translations = {
       period: '2022 — Present',
       location: 'On-site',
       summary:
-        'I work as a full stack developer focused on internal systems, DevExpress reporting and SQL Server database optimization.',
-      responsibilitiesTitle: 'Key responsibilities',
-      responsibilities: [
-        'Building web applications with C# .NET and DevExpress',
-        'Systems analysis',
-        'Performance optimization on SQL Server',
-        'Developing advanced reports with DevExpress',
+        "I develop and maintain the company's internal systems: an ERP covering the full commercial cycle (orders, inventory, finance and billing) and an integrated fiscal and financial platform for e-invoicing (NF-e), bank slips and receivables.",
+      stats: [
+        { value: '80×', label: 'performance gain' },
+        { value: '1.1 s', label: 'down from ~87 s' },
+        { value: `${yearsOfExperience}+`, label: 'years on production systems' },
       ],
-      stackTitle: 'Main technologies',
+      highlightsTitle: 'Key achievements',
+      highlights: [
+        {
+          title: '80× performance gain',
+          desc: 'Rewrote a cursor-based critical routine as set-based MERGE … OUTPUT, replacing hundreds of row-by-row statements with 2 batch operations: from ~87 s to 1.1 s, with near-constant time regardless of volume.',
+        },
+        {
+          title: 'Silent data corruption uncovered',
+          desc: 'Traced duplicate records to users retrying operations that had timed out but actually succeeded, and prevented them with sp_getapplock plus a UI lock.',
+        },
+        {
+          title: 'Bank slip listing rebuilt',
+          desc: 'A screen that froze on large data volumes now pages and sorts in the database through a typed stored procedure, with full feature parity.',
+        },
+        {
+          title: 'Legacy integration migrated',
+          desc: 'Moved bank slip issuance from a legacy COM component to a modern REST API.',
+        },
+        {
+          title: 'Intermittent production bug solved',
+          desc: 'Found that a stale NHibernate session object was overwriting changes made by a stored procedure; validated the fix against 7 test scenarios before release.',
+        },
+        {
+          title: 'Regulatory changes delivered',
+          desc: 'Alphanumeric CNPJ (IN RFB 2.229/2024) across two systems, UDI-DI traceability, and analysis of the Tax Reform rules for NF-e returns (NT 2025.002).',
+        },
+        {
+          title: 'Better error diagnostics',
+          desc: 'Made the data layer preserve the original exception and stack trace, which exposed the root cause of an unrelated issue the same day.',
+        },
+      ],
+      approachTitle: 'How I work',
+      approach: [
+        'Measure before fixing: read the code, procedures and triggers, and only run read-only queries in production.',
+        'Small, reversible changes, with tests and rollback notes.',
+        'Translate technical problems into clear, step-by-step guidance for users.',
+      ],
+      stackTitle: 'Stack at Titaniumfix',
     },
     projects: {
       title: 'Projects',
@@ -79,9 +118,17 @@ export const translations = {
       },
     },
     courses: {
-      title: 'Courses & Certificates',
+      title: 'Education & Certificates',
       subtitle: 'Always learning and keeping up with new technologies.',
       viewCertificate: 'View certificate',
+      educationTitle: 'Education',
+      degree: {
+        title: 'Technologist Degree in Systems Analysis and Development',
+        school: 'Universidade Paulista (UNIP)',
+        year: '2024',
+        note: 'Undergraduate degree',
+      },
+      certificatesTitle: 'Certificates',
       items: {
         1: {
           title: 'Blazor WebAssembly Fundamentals',
@@ -141,19 +188,20 @@ export const translations = {
 
   pt: {
     langSwitchTo: 'EN',
+    cvDownload: 'Baixar currículo',
     nav: { back: 'Voltar ao início' },
     links: {
       about: 'Sobre',
       experience: 'Experiência',
       projects: 'Projetos',
-      courses: 'Cursos',
+      courses: 'Formação',
       contact: 'Contato',
     },
     home: {
       greeting: 'Olá.',
       role: 'Desenvolvedor Full Stack',
       intro1:
-        'Meu nome é Matheus Alexandre, desenvolvedor full stack baseado no Brasil. Há 2 anos construo aplicações modernas e performáticas com C#, .NET, SQL Server, React e Blazor.',
+        `Meu nome é Matheus Alexandre, desenvolvedor full stack baseado no Brasil. Há ${yearsOfExperience} anos construo aplicações modernas e performáticas com C#, .NET, SQL Server, React e Blazor.`,
       intro2:
         'Sou apaixonado por arquitetura limpa, sistemas performáticos e experiências de usuário bem construídas e intuitivas.',
       projectsTitle: 'Projetos',
@@ -176,15 +224,50 @@ export const translations = {
       period: '2022 — Atual',
       location: 'Presencial',
       summary:
-        'Atuo como desenvolvedor full stack, com foco em desenvolvimento de sistema interno, relatórios com DevExpress e otimização de banco de dados em SQL Server.',
-      responsibilitiesTitle: 'Principais responsabilidades',
-      responsibilities: [
-        'Desenvolvimento de aplicações web com C# .NET e DevExpress',
-        'Análise de sistema',
-        'Otimização de performance em SQL Server',
-        'Desenvolvimento de relatórios com DevExpress',
+        'Desenvolvo e mantenho os sistemas internos da empresa: um ERP que cobre todo o ciclo comercial (pedidos, estoque, financeiro e faturamento) e uma plataforma fiscal e financeira integrada para emissão de NF-e, boletos e contas a receber.',
+      stats: [
+        { value: '80×', label: 'ganho de performance' },
+        { value: '1,1 s', label: 'antes ~87 s' },
+        { value: `${yearsOfExperience}+`, label: 'anos em sistemas de produção' },
       ],
-      stackTitle: 'Principais tecnologias',
+      highlightsTitle: 'Principais entregas',
+      highlights: [
+        {
+          title: 'Ganho de 80× em performance',
+          desc: 'Reescrevi uma rotina crítica baseada em cursor usando MERGE … OUTPUT, trocando centenas de comandos linha a linha por 2 operações em lote: de ~87 s para 1,1 s, com tempo quase constante independente do volume.',
+        },
+        {
+          title: 'Inconsistência silenciosa de dados',
+          desc: 'Rastreei registros duplicados até usuários repetindo operações que davam timeout mas já tinham sido concluídas, e bloqueei com sp_getapplock e trava na interface.',
+        },
+        {
+          title: 'Listagem de boletos reconstruída',
+          desc: 'Uma tela que travava com grandes volumes de dados passou a paginar e ordenar no banco, via stored procedure com parâmetros tipados, mantendo todas as funções.',
+        },
+        {
+          title: 'Migração de integração legada',
+          desc: 'Migrei a emissão de boletos de um componente COM legado para uma API REST moderna.',
+        },
+        {
+          title: 'Bug intermitente em produção',
+          desc: 'Descobri que um objeto desatualizado na sessão do NHibernate sobrescrevia alterações feitas por uma procedure; validei a correção com 7 cenários de teste antes de publicar.',
+        },
+        {
+          title: 'Mudanças regulatórias',
+          desc: 'CNPJ alfanumérico (IN RFB 2.229/2024) em dois sistemas, rastreabilidade UDI-DI e análise das regras da Reforma Tributária para NF-e de devolução (NT 2025.002).',
+        },
+        {
+          title: 'Diagnóstico de erros',
+          desc: 'Fiz a camada de dados preservar a exceção original e o stack trace, o que revelou no mesmo dia a causa de um problema não relacionado.',
+        },
+      ],
+      approachTitle: 'Como trabalho',
+      approach: [
+        'Medir antes de corrigir: leio o código, as procedures e os triggers, e só faço consultas de leitura em produção.',
+        'Mudanças pequenas e reversíveis, com testes e documentação para rollback.',
+        'Traduzo problemas técnicos em orientação clara, passo a passo, para os usuários.',
+      ],
+      stackTitle: 'Stack na Titaniumfix',
     },
     projects: {
       title: 'Projetos',
@@ -217,9 +300,17 @@ export const translations = {
       },
     },
     courses: {
-      title: 'Cursos & Certificados',
+      title: 'Formação & Certificados',
       subtitle: 'Sempre em busca de novos conhecimentos e atualizações tecnológicas.',
       viewCertificate: 'Ver certificado',
+      educationTitle: 'Formação',
+      degree: {
+        title: 'Tecnólogo em Análise e Desenvolvimento de Sistemas',
+        school: 'Universidade Paulista (UNIP)',
+        year: '2024',
+        note: 'Graduação tecnológica',
+      },
+      certificatesTitle: 'Certificados',
       items: {
         1: {
           title: 'Fundamentos do Blazor Web Assembly',

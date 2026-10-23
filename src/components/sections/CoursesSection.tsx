@@ -17,6 +17,25 @@ const CoursesSection = () => {
 
   return (
     <Section id="cursos" title={t.courses.title} subtitle={t.courses.subtitle}>
+      {/* Degree */}
+      <h3 className="mb-4 font-mono text-xs uppercase tracking-[0.25em] text-foreground-muted">
+        {t.courses.educationTitle}
+      </h3>
+      <div className="flex flex-col gap-3 border-l border-gold/50 pl-6 sm:flex-row sm:items-start sm:justify-between sm:gap-8">
+        <div className="max-w-xl">
+          <p className="text-[19px] font-light text-foreground">{t.courses.degree.title}</p>
+          <p className="mt-1.5 text-[14px] text-foreground-muted">
+            {t.courses.degree.school} · {t.courses.degree.note}
+          </p>
+        </div>
+        <span className="flex-shrink-0 font-mono text-xs uppercase tracking-[0.2em] text-gold-light/80">
+          {t.courses.degree.year}
+        </span>
+      </div>
+
+      <h3 className="mb-2 mt-14 font-mono text-xs uppercase tracking-[0.25em] text-foreground-muted">
+        {t.courses.certificatesTitle}
+      </h3>
       <ul className="space-y-px">
         {courseMeta.map((course, index) => {
           const text = t.courses.items[course.id];

@@ -8,7 +8,7 @@ import ExperienceSection from '@/components/sections/ExperienceSection';
 import ProjectsSection from '@/components/sections/ProjectsSection';
 import CoursesSection from '@/components/sections/CoursesSection';
 import ContactSection from '@/components/sections/ContactSection';
-import matheusProfile from '/images/Gemini_Foto3.png';
+import matheusProfile from '/images/matheus.webp';
 
 type Skill = {
   name: string;
@@ -16,13 +16,18 @@ type Skill = {
   LucideIcon?: LucideIcon; // lucide-react fallback for techs missing in devicon
 };
 
-const skills: Skill[] = [
+// Core: the Microsoft ecosystem I specialize in
+const coreSkills: Skill[] = [
   { name: 'C#', icon: 'devicon-csharp-plain' },
   { name: '.NET', icon: 'devicon-dotnetcore-plain' },
   { name: '.NET MAUI', LucideIcon: Smartphone },
   { name: 'SQL Server', icon: 'devicon-microsoftsqlserver-plain' },
   { name: 'Blazor', icon: 'devicon-blazor-original' },
   { name: 'Azure', icon: 'devicon-azure-plain' },
+];
+
+// Secondary: other stacks I also work with
+const otherSkills: Skill[] = [
   { name: 'React', icon: 'devicon-react-original' },
   { name: 'TypeScript', icon: 'devicon-typescript-plain' },
   { name: 'Java', icon: 'devicon-java-plain' },
@@ -106,26 +111,33 @@ const Home = () => {
             </motion.div>
 
             {/* Stack */}
-            <motion.div custom={4} variants={fadeUp} initial="hidden" animate="visible" className="mt-10">
-              <p className="mb-4 font-mono text-xs uppercase tracking-[0.25em] text-foreground-muted">
-                {t.home.stackTitle}
-              </p>
-              <div className="flex flex-wrap items-center gap-5">
-                {skills.map((skill) => (
-                  <div key={skill.name} className="group flex items-center gap-2" title={skill.name}>
-                    {skill.LucideIcon ? (
-                      <skill.LucideIcon
-                        className="h-[22px] w-[22px] text-foreground-muted transition-colors duration-300 group-hover:text-gold-light"
-                        strokeWidth={1.5}
-                      />
-                    ) : (
-                      <i
-                        className={`${skill.icon} text-2xl text-foreground-muted transition-colors duration-300 group-hover:text-gold-light`}
-                      />
-                    )}
+            <motion.div custom={4} variants={fadeUp} initial="hidden" animate="visible" className="mt-10 space-y-6">
+              {[
+                { title: t.home.stackTitle, items: coreSkills, tone: 'text-foreground/80', size: 'text-2xl', box: 'h-[22px] w-[22px]' },
+                { title: t.home.otherStackTitle, items: otherSkills, tone: 'text-foreground-muted/70', size: 'text-xl', box: 'h-[18px] w-[18px]' },
+              ].map((group) => (
+                <div key={group.title}>
+                  <p className="mb-3 font-mono text-xs uppercase tracking-[0.25em] text-foreground-muted">
+                    {group.title}
+                  </p>
+                  <div className="flex flex-wrap items-center gap-5">
+                    {group.items.map((skill) => (
+                      <div key={skill.name} className="group flex items-center gap-2" title={skill.name}>
+                        {skill.LucideIcon ? (
+                          <skill.LucideIcon
+                            className={`${group.box} ${group.tone} transition-colors duration-300 group-hover:text-gold-light`}
+                            strokeWidth={1.5}
+                          />
+                        ) : (
+                          <i
+                            className={`${skill.icon} ${group.size} ${group.tone} transition-colors duration-300 group-hover:text-gold-light`}
+                          />
+                        )}
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </motion.div>
           </div>
 

@@ -17,19 +17,20 @@ export const translations = {
     },
     home: {
       greeting: 'Welcome.',
-      role: 'Full Stack Developer',
+      role: 'Full Stack .NET Developer',
       intro1:
         `My name is Matheus Alexandre, a full stack developer based in Brazil. For the past ${yearsOfExperience} years I've built modern, high-performance applications with C#, .NET, SQL Server, React and Blazor.`,
       intro2:
         "I'm passionate about clean architecture, performant systems and well-crafted, intuitive user experiences.",
       projectsTitle: 'Projects',
       exploreTitle: 'Explore',
-      stackTitle: 'Stack',
+      stackTitle: 'Core stack',
+      otherStackTitle: 'Also work with',
       scroll: 'Scroll',
     },
     about: {
       title: 'About',
-      heading: 'Full Stack Developer',
+      heading: 'Full Stack .NET Developer',
       body1:
         'I build modern, performant applications end to end — from SQL Server data modeling and .NET back-ends to React and Blazor front-ends.',
       body2:
@@ -121,6 +122,7 @@ export const translations = {
       title: 'Education & Certificates',
       subtitle: 'Always learning and keeping up with new technologies.',
       viewCertificate: 'View certificate',
+      viewDiploma: 'View diploma',
       educationTitle: 'Education',
       degree: {
         title: 'Technologist Degree in Systems Analysis and Development',
@@ -199,19 +201,20 @@ export const translations = {
     },
     home: {
       greeting: 'Olá.',
-      role: 'Desenvolvedor Full Stack',
+      role: 'Desenvolvedor Full Stack .NET',
       intro1:
         `Meu nome é Matheus Alexandre, desenvolvedor full stack baseado no Brasil. Há ${yearsOfExperience} anos construo aplicações modernas e performáticas com C#, .NET, SQL Server, React e Blazor.`,
       intro2:
         'Sou apaixonado por arquitetura limpa, sistemas performáticos e experiências de usuário bem construídas e intuitivas.',
       projectsTitle: 'Projetos',
       exploreTitle: 'Explore',
-      stackTitle: 'Stack',
+      stackTitle: 'Stack principal',
+      otherStackTitle: 'Também trabalho com',
       scroll: 'Role',
     },
     about: {
       title: 'Sobre',
-      heading: 'Desenvolvedor Full Stack',
+      heading: 'Desenvolvedor Full Stack .NET',
       body1:
         'Construo aplicações modernas e performáticas de ponta a ponta — da modelagem de dados em SQL Server e back-ends em .NET aos front-ends em React e Blazor.',
       body2:
@@ -303,6 +306,7 @@ export const translations = {
       title: 'Formação & Certificados',
       subtitle: 'Sempre em busca de novos conhecimentos e atualizações tecnológicas.',
       viewCertificate: 'Ver certificado',
+      viewDiploma: 'Ver diploma',
       educationTitle: 'Formação',
       degree: {
         title: 'Tecnólogo em Análise e Desenvolvimento de Sistemas',

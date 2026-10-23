@@ -21,9 +21,21 @@ const CoursesSection = () => {
       <h3 className="mb-4 font-mono text-xs uppercase tracking-[0.25em] text-foreground-muted">
         {t.courses.educationTitle}
       </h3>
-      <div className="flex flex-col gap-3 border-l border-gold/50 pl-6 sm:flex-row sm:items-start sm:justify-between sm:gap-8">
+      <a
+        href="/images/diploma-unip.jpg"
+        target="_blank"
+        rel="noopener noreferrer"
+        title={t.courses.viewDiploma}
+        className="group flex flex-col gap-3 border-l border-gold/50 pl-6 sm:flex-row sm:items-start sm:justify-between sm:gap-8"
+      >
         <div className="max-w-xl">
-          <p className="text-[19px] font-light text-foreground">{t.courses.degree.title}</p>
+          <p className="flex items-center gap-1.5 text-[19px] font-light text-foreground transition-colors duration-300 group-hover:text-gold-light">
+            {t.courses.degree.title}
+            <ArrowUpRight
+              className="h-4 w-4 flex-shrink-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              strokeWidth={1.5}
+            />
+          </p>
           <p className="mt-1.5 text-[14px] text-foreground-muted">
             {t.courses.degree.school} · {t.courses.degree.note}
           </p>
@@ -31,7 +43,7 @@ const CoursesSection = () => {
         <span className="flex-shrink-0 font-mono text-xs uppercase tracking-[0.2em] text-gold-light/80">
           {t.courses.degree.year}
         </span>
-      </div>
+      </a>
 
       <h3 className="mb-2 mt-14 font-mono text-xs uppercase tracking-[0.25em] text-foreground-muted">
         {t.courses.certificatesTitle}

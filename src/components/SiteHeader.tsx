@@ -2,9 +2,12 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Github, Linkedin, FileDown } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
+import { useToast } from '@/hooks/use-toast';
+
+const EMAIL = 'matheusalexmc@gmail.com';
 
 const socials = [
-  { icon: Mail, href: 'mailto:matheusalexmc@gmail.com', label: 'Email' },
+  { icon: Mail, href: `mailto:${EMAIL}`, label: 'Email' },
   { icon: Github, href: 'https://github.com/Mathows', label: 'GitHub' },
   {
     icon: Linkedin,
@@ -15,7 +18,21 @@ const socials = [
 
 const SiteHeader = () => {
   const { lang, toggleLang, t } = useLanguage();
+  const { toast } = useToast();
   const [scrolled, setScrolled] = useState(false);
+
+  // mailto: does nothing for visitors without a mail app, so copy the address
+  // instead; fall back to mailto only if the clipboard is unavailable
+  const handleEmailClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!navigator.clipboard) return;
+    e.preventDefault();
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      toast({ title: t.emailCopied, description: EMAIL });
+    } catch {
+      window.location.href = `mailto:${EMAIL}`;
+    }
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -69,7 +86,9 @@ const SiteHeader = () => {
               href={href}
               target={href.startsWith('http') ? '_blank' : undefined}
               rel="noopener noreferrer"
-              aria-label={label}
+              onClick={href.startsWith('mailto:') ? handleEmailClick : undefined}
+              aria-label={href.startsWith('mailto:') ? t.copyEmail : label}
+              title={href.startsWith('mailto:') ? t.copyEmail : label}
               className="text-foreground-muted transition-colors duration-300 hover:text-gold-light"
             >
               <Icon className="h-[18px] w-[18px]" strokeWidth={1.5} />

@@ -7,6 +7,8 @@ export const translations = {
   en: {
     langSwitchTo: 'PT',
     cvDownload: 'Download CV',
+    copyEmail: 'Copy email',
+    emailCopied: 'Email copied',
     nav: { back: 'Back to home' },
     links: {
       about: 'About',
@@ -32,9 +34,9 @@ export const translations = {
       title: 'About',
       heading: 'Full Stack .NET Developer',
       body1:
-        'I build modern, performant applications end to end — from SQL Server data modeling and .NET back-ends to React and Blazor front-ends.',
+        'I started in 2022 maintaining legacy systems and found out I enjoy exactly the hard part: tracking down the root cause of a bug, understanding a business rule in depth and turning a slow routine into an instant one.',
       body2:
-        'I care about clean architecture, maintainable code and shipping software that actually solves problems.',
+        "I feel at home in the .NET ecosystem — C#, ASP.NET, Entity Framework and NHibernate — and in relational databases, especially SQL Server: data modeling, stored procedures, query tuning and diagnosing concurrency issues. Today I bring that foundation to modern projects with .NET and Blazor.",
     },
     experience: {
       title: 'Experience',
@@ -191,6 +193,8 @@ export const translations = {
   pt: {
     langSwitchTo: 'EN',
     cvDownload: 'Baixar currículo',
+    copyEmail: 'Copiar e-mail',
+    emailCopied: 'E-mail copiado',
     nav: { back: 'Voltar ao início' },
     links: {
       about: 'Sobre',
@@ -216,9 +220,9 @@ export const translations = {
       title: 'Sobre',
       heading: 'Desenvolvedor Full Stack .NET',
       body1:
-        'Construo aplicações modernas e performáticas de ponta a ponta — da modelagem de dados em SQL Server e back-ends em .NET aos front-ends em React e Blazor.',
+        'Comecei em 2022 mantendo sistemas legados e descobri que gosto justamente da parte difícil: investigar a causa de um bug, entender a fundo uma regra de negócio e transformar uma rotina lenta em instantânea.',
       body2:
-        'Me importo com arquitetura limpa, código de fácil manutenção e entregar software que realmente resolve problemas.',
+        'Me sinto em casa no ecossistema .NET — C#, ASP.NET, Entity Framework e NHibernate — e em bancos de dados relacionais, especialmente SQL Server: modelagem, stored procedures, otimização de consultas e diagnóstico de problemas de concorrência. Hoje levo essa base para projetos modernos com .NET e Blazor.',
     },
     experience: {
       title: 'Experiência',

@@ -88,16 +88,16 @@ export const translations = {
           desc: 'Building rich, interactive Single Page Applications with C# and WebAssembly.',
         },
         2: {
-          title: 'Blazor Server Fundamentals',
-          desc: 'Component lifecycle and real-time communication via SignalR in Blazor Server.',
+          title: '.NET Developer Fundamentals',
+          desc: 'The .NET platform from the ground up: runtime, SDK, CLI and project structure.',
         },
         3: {
           title: 'ASP.NET 6 Fundamentals',
           desc: 'Core concepts in ASP.NET 6 for modern APIs and microservice-based applications.',
         },
         4: {
-          title: 'An Overview of ASP.NET Razor Pages',
-          desc: 'The page-based paradigm with C# and HTML using ASP.NET Razor Pages.',
+          title: 'C# Fundamentals',
+          desc: 'Core C# language features: types, control flow and object-oriented programming.',
         },
         5: {
           title: 'Entity Framework Fundamentals',
@@ -226,16 +226,16 @@ export const translations = {
           desc: 'Criação de Single Page Applications ricas e interativas utilizando C# e WebAssembly.',
         },
         2: {
-          title: 'Fundamentos do Blazor Server',
-          desc: 'Ciclo de vida dos componentes e comunicação em tempo real via SignalR no Blazor Server.',
+          title: '.NET Developer Fundamentals',
+          desc: 'A plataforma .NET desde a base: runtime, SDK, CLI e estrutura de projetos.',
         },
         3: {
           title: 'Fundamentos do ASP.NET 6',
           desc: 'Conceitos essenciais no ASP.NET 6 para APIs modernas e aplicações baseadas em microserviços.',
         },
         4: {
-          title: 'Uma visão geral sobre o ASP.NET Razor Pages',
-          desc: 'O paradigma baseado em páginas usando C# e HTML com ASP.NET Razor Pages.',
+          title: 'Fundamentos do C#',
+          desc: 'Recursos essenciais da linguagem C#: tipos, controle de fluxo e programação orientada a objetos.',
         },
         5: {
           title: 'Fundamentos do Entity Framework',

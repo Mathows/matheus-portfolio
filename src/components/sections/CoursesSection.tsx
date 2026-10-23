@@ -4,12 +4,12 @@ import { useLanguage } from '@/i18n/LanguageContext';
 import Section from './Section';
 
 const courseMeta = [
-  { id: 1, date: '2024', topics: ['C#', 'Blazor', 'WebAssembly'], link: 'https://balta.io/certificados/9765ce52-74fd-4540-a4f1-c8c61c5cf3aa' },
-  { id: 2, date: '2023', topics: ['C#', 'Blazor Server', 'SignalR'], link: 'https://balta.io/certificados/8f1f3c89-615d-424a-8f3b-f51938bab7bf' },
-  { id: 3, date: '2023', topics: ['C#', 'ASP.NET Core', 'REST APIs'], link: 'https://balta.io/certificados/5e192151-59b8-4ed7-911f-5c47daae8206' },
-  { id: 4, date: '2023', topics: ['C#', 'Razor Pages', 'ASP.NET'], link: 'https://balta.io/certificados/ce3d41c1-3643-4fdb-991f-60ea206e9fbd' },
-  { id: 5, date: '2023', topics: ['C#', 'Entity Framework', 'ORM'], link: 'https://balta.io/certificados/42e8b54a-9f05-46b2-add2-dcfee3516b9f' },
-  { id: 6, date: '2023', topics: ['C#', 'Dapper', 'SQL Server'], link: 'https://balta.io/certificados/e40e6e2f-92ff-4a7f-ad28-3272d3e50de4' },
+  { id: 1, date: '2024', topics: ['C#', 'Blazor', 'WebAssembly'], link: 'https://balta.io/certificates/0271319e-0f11-495a-b690-9b04b984e63e' },
+  { id: 2, date: '2023', topics: ['.NET', 'C#', 'CLI'], link: 'https://balta.io/certificates/ff554d18-acd7-40d6-b31b-cae5a412c42c' },
+  { id: 3, date: '2023', topics: ['C#', 'ASP.NET Core', 'REST APIs'], link: 'https://balta.io/certificates/4c266379-392a-475c-b688-2a37d0284dd0' },
+  { id: 4, date: '2023', topics: ['C#', 'OOP', '.NET'], link: 'https://balta.io/certificates/b10eb808-cd59-483f-8ca3-e6798b920776' },
+  { id: 5, date: '2023', topics: ['C#', 'Entity Framework', 'ORM'], link: 'https://balta.io/certificates/45bc392f-be62-490a-b1c2-51f9427d9864' },
+  { id: 6, date: '2023', topics: ['C#', 'Dapper', 'SQL Server'], link: 'https://balta.io/certificates/cd906328-67bc-411e-9ef3-48e4c2d56c5f' },
 ] as const;
 
 const CoursesSection = () => {
